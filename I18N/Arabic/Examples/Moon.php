@@ -23,7 +23,7 @@ if ($day > 29 || $day < 1) {
 $day--;
 ImageCopyResampled($moon, $all, 0, 0, $day*50, 0, 50, 50, 50, 50);
 
-ImageJPEG($moon, '', 80);
+ImageJPEG($moon, null, 80);
 
 ImageDestroy($all);
 ImageDestroy($moon);

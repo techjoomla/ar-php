@@ -1,4 +1,45 @@
-What's new in ArPHP 3.1.0 (release date: #######)
+What's new in ArPHP 3.6.0 (release date: ####)
+-----------------------------------------------------
+
+* Implement more accurate algorithm to convert from/to Hijri calendar (published in
+  the Islamic Crescents' Observation Project <http://www.icoproject.org>) in both 
+  Mktime & Date sub classes, thanks to Mohammed Al-Shehri <moh.alshehri@gmail.com>.
+  
+* Extend the Numbers sub class functionality by add "money2str" method to spell 
+  provided price in Arabic idiom by define value, Arabic currency ISO code, and
+  language. Thanks to <msme@arabteam2000-forum.com> who developed first draft.
+
+(*) Add one more method to the Numbers sub class to convert Arabic string back into integer.
+
+* Add one more method to the Mktime sub class called "hijriMonthDays" returns how many
+  days are there in a given Hijri month, thanks to Mr. Mouayed Al-Mohammadi for the idea.
+  
+* Fix the Glyphs bug when render the shape of the first letter in the input string just 
+  like letter in the middle of word! Thanks to Mr. Shady Massalha <massalha@yahoo.com>.
+  
+(*) Fix Glyphs bug when we have Tashkeel within لا, لآ, لأ, or لإ which rendered incorrectly 
+  by add extra Lam before, thanks to Mr. Said Bakr <saidbakr2@users.sourceforge.net> 
+  who reported this bug and fix it.
+
+(*) Fix Glyphs bug when we have مُوسَىٰ وَعِيسَىٰ where it presents as Tanween!
+
+* Extend writing error rules using in ArQuery sub class by add cases to handle
+  extended Arabic letters (i.e. ژ, ڨ, پ, چ, گ, and ڪ), thanks to Ammar Abdelhamid 
+  <flashpack@gmail.com> who suggest this.
+
+* Reduce the size of Salat sub class by 20% by remove deprecated "getPrayTime"algorithm, 
+  that method name is now just an alias of the new "getPrayTime2" method.
+
+(*) Convert all GIF to PNG for GNU!
+
+(*) Move out SVG flags, arab_countries.xml, and cities.db to be in extra add-in.
+
+(*) Maintainer Mr. Anas R. <anas.ram@gmail.com> and Debian distribution
+
+(*) Maintainer Mr. Tawfek Daghistani <tawfekov@gmail.com> and Composer (http://getcomposer.org/doc/00-intro.md) distribution https://packagist.org/packages/ar-php/ar-php
+
+
+What's new in ArPHP 3.5.0 (release date: Sep 1, 2012)
 -----------------------------------------------------
 
 * More accurate gender detection by add some formats like إفتعال and إفعال as 
@@ -15,11 +56,18 @@ What's new in ArPHP 3.1.0 (release date: #######)
 * Salat sub class deliver now extra output format by present times in Unix timestamp 
   to provide users more flexibility in handle it.
 
-* Tag HTML page content if it is belong to forum, currently recognize only vBulletin.
+* Tag HTML content if it is belong to forum using new "isForum" method, currently it 
+  recognize only vBulletin.
   
 * Fix the transliteration issue of ال precedes a word beginning with one of the
   "sun letters", and issue of ة when it used in combined words to romanized as 
   t instead of h.
+
+* Fix the question mark issue in the "swapEa" method in the "KeySwap" sub class, thanks
+  to Al-Kindi project team <http://www.ar-php.org/stats/al-kindi> who reported this bug.
+
+* Fix the losing new line issue in the "standard" method in the "Standard" sub class, thanks
+  to Al-Kindi project team <http://www.ar-php.org/stats/al-kindi> who reported this bug.
 
 * Move out "js" sub directory and keyboard example to keep it pure PHP code.
 
