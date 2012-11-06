@@ -179,8 +179,6 @@ class I18N_Arabic_Date
     private $_mode = 1;
     private $_xml  = null;
 
-    private static $_islamicEpoch = 1948439.5;
-
     /**
      * Loads initialize values
      *
@@ -418,12 +416,11 @@ class I18N_Arabic_Date
      */
     protected function hjConvert($Y, $M, $D)
     {
-        // To get these functions to work, you have to compile PHP 
-        // with --enable-calendar 
-        // http://www.php.net/manual/en/calendar.installation.php
-        // $jd = GregorianToJD($M, $D, $Y);
-        
-        $jd = $this->gregToJd($M, $D, $Y);
+        if (function_exists(GregorianToJD)) {
+            $jd = GregorianToJD($M, $D, $Y);
+        } else {
+            $jd = $this->gregToJd($M, $D, $Y);
+        }
         
         list($year, $month, $day) = $this->jdToIslamic($jd);
         
@@ -440,14 +437,16 @@ class I18N_Arabic_Date
      */
     protected function jdToIslamic($jd)
     {
-        $jd    = (int)$jd + 0.5;
-        $year  = ((30 * ($jd - self::$_islamicEpoch)) + 10646) / 10631;
-        $year  = (int)$year;
-        $month = min(12, ceil(($jd - (29 + $this->islamicToJd($year, 1, 1))) / 29.5) 
-                         + 1);
-        $day   = ($jd - $this->islamicToJd($year, $month, 1)) + 1;
+        $l = (int)$jd - 1948440 + 10632;
+        $n = (int)(($l - 1) / 10631);
+        $l = $l - 10631 * $n + 354;
+        $j = (int)((10985 - $l) / 5316) * (int)((50 * $l) / 17719) + (int)($l / 5670) * (int)((43 * $l) / 15238);
+        $l = $l - (int)((30 - $j) / 15) * (int)((17719 * $j) / 50) - (int)($j / 16) * (int)((15238 * $j) / 43) + 29;
+        $m = (int)((24 * $l) / 709);
+        $d = $l - (int)((709 * $m) / 24);
+        $y = (int)(30 * $n + $j - 30);
         
-        return array($year, $month, $day);
+        return array($y, $m, $d);
     }
     
     /**
@@ -462,8 +461,8 @@ class I18N_Arabic_Date
      */
     protected function islamicToJd($year, $month, $day)
     {
-        return($day + ceil(29.5 * ($month - 1)) + ($year - 1) * 354 + 
-               (int)((3 + (11 * $year)) / 30) + self::$_islamicEpoch) - 1;
+        $jd = (int)((11 * $year + 3) / 30) + (int)(354 * $year) + (int)(30 * $month) - (int)(($month - 1) / 2) + $day + 1948440 - 385;
+        return $jd;
     }
     
     /**
@@ -479,17 +478,20 @@ class I18N_Arabic_Date
      */
     protected function gregToJd ($m, $d, $y)
     {
-        if ($m > 2) {
-            $m = $m - 3;
-        } else {
-            $m = $m + 9; 
-            $y = $y - 1;
+        if ($m < 3) {
+            $y--;
+            $m += 12;
         }
         
-        $c  = $y / 100; 
-        $ya = $y - 100 * $c;
-        $jd = (146097 * $c) / 4 + (1461 * $ya) / 4 + 
-              (153 * $m + 2) / 5 + $d + 1721119;
+        if (($y < 1582) || ($y == 1582 && $m < 10) || ($y == 1582 && $m == 10 && $d <= 15)) {
+            // This is ignored in the GregorianToJD PHP function!
+            $b = 0;
+        } else {
+            $a = (int)($y / 100);
+            $b = 2 - $a + (int)($a / 4);
+        }
+        
+        $jd = (int)(365.25 * ($y + 4716)) + (int)(30.6001 * ($m + 1)) + $d + $b - 1524.5;
         
         return round($jd);
     }
