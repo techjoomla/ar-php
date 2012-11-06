@@ -109,6 +109,9 @@ class I18N_Arabic_Standard
         $patterns     = array();
         $replacements = array();
         
+        array_push($patterns, '/\r\n/u', '/([^\@])\n([^\@])/u', '/\r/u');
+        array_push($replacements, "\n@@@\n", "\\1\n&&&\n\\2", "\n###\n");
+        
         /**
          * النقطة، الفاصلة، الفاصلة المنقوطة،
          * النقطتان، علامتي الاستفهام والتعجب،
@@ -179,6 +182,9 @@ class I18N_Arabic_Standard
          */
         array_push($patterns, '/\s+(\d+)\s*\%\s+/u');
         array_push($replacements, ' %\\1 ');
+        
+        array_push($patterns, '/\n?@@@\n?/u', '/\n?&&&\n?/u', '/\n?###\n?/u');
+        array_push($replacements, "\r\n", "\n", "\r");
 
         $text = preg_replace($patterns, $replacements, $text);
 

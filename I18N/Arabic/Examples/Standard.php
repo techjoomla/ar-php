@@ -39,7 +39,7 @@ Kg أو مثلا MB 16 وسواها حتى النسب المؤية مثل 20% أ
 END;
 
     $str = $Arabic->standard($content);
-    
+
     echo '<b>Origenal:</b>';
     echo '<p dir="rtl" align="justify">';
     echo $content . '</p>';
