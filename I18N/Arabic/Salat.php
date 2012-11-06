@@ -389,157 +389,27 @@ class I18N_Arabic_Salat
     }
     
     /**
-     * Calculate Salat times for the date set in setSalatDate methode, and 
-     * location set in setSalatLocation.
+     * Alias for getPrayTime2 method
      *                        
      * @return array of Salat times + sun rise in the following format
      *               hh:mm where hh is the hour in local format and 24 mode
      *               mm is minutes with leading zero to be 2 digits always
-     *               array items is [Fajr, Sunrise, Zuhr, Asr, Maghrib, Isha]
+     *               array items is [$Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib, 
+     *               $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     * @author Mohamad Magdy <mohamad_magdy_egy@hotmail.com>
-     * @source http://qasweb.org/qasforum/index.php?showtopic=177&st=0
+     * @author Hamid Zarrabi-Zadeh <zarrabi@scs.carleton.ca>
+     * @source http://praytimes.org/calculation
      */
     public function getPrayTime()
     {
-        $prayTime = array();
-        
-        // نحسب اليوم الجوليانى
-        $d = ((367 * $this->year) - (floor((7 / 4) * ($this->year + 
-             floor(($this->month + 9) / 12)))) + floor(275 * ($this->month / 9)) + 
-             $this->day - 730531.5);
-        
-        // نحسب طول الشمس الوسطى
-        $L = fmod(280.461 + 0.9856474 * $d, 360);
-        
-        // ثم نحسب حصة الشمس الوسطى
-        $M = fmod(357.528 + 0.9856003 * $d, 360);
-        
-        // ثم نحسب طول الشمس البروجى
-        $lambda = $L + 1.915 * sin($M * pi() / 180) + 
-                  0.02 * sin(2 * $M * pi() / 180);
-        
-        // ثم نحسب ميل دائرة البروج
-        $obl = 23.439 - 0.0000004 * $d;
-        
-        // ثم نحسب المطلع المستقيم
-        $alpha = atan(cos($obl * pi() / 180) * tan($lambda * pi() / 180)) * 
-                 180 / pi();
-        $alpha = $alpha - (360 * floor($alpha / 360));
-        
-        // ثم نعدل المطلع المستقيم
-        $alpha = $alpha + 90 * ((int)($lambda / 90) - (int)($alpha / 90));
-        
-        // نحسب الزمن النجمى بالدرجات الزاوية
-        $ST = fmod(100.46 + 0.985647352 * $d, 360);
-        
-        // ثم نحسب ميل الشمس الزاوى
-        $Dec = asin(sin($obl * pi() / 180) * sin($lambda * pi() / 180)) * 180 / pi();
-        
-        // نحسب زوال الشمس الوسطى
-        $noon = fmod(abs($alpha - $ST), 360);
-        
-        // ثم الزوالى العالمى
-        $un_noon = $noon - $this->long;
-        
-        // ثم الزوال المحلى
-        $local_noon = fmod(($un_noon/15) + $this->zone, 24);
-        
-        // وقت صلاة الظهر
-        $Dhuhr       = $local_noon / 24;
-        $Dhuhr_h     = (int)($Dhuhr * 24 * 60 / 60);
-        $Dhuhr_m     = sprintf('%02d', ($Dhuhr * 24 * 60) % 60);
-        $prayTime[2] = $Dhuhr_h.':'.$Dhuhr_m;
-        
-        if ($this->school == 'Shafi') {
-            // نحسب إرتفاع الشمس لوقت صلاة العصر
-            // حسب المذهب الشافعي
-            $T = atan(1 + tan(abs($this->lat - $Dec) * pi() / 180)) * 180 / pi();
-            
-            // ثم نحسب قوس الدائر أى الوقت المتبقى
-            // من وقت الظهر حتى صلاة العصر
-            // حسب المذهب الشافعي
-            $V = acos((sin((90 - $T) * pi() / 180) - sin($Dec * pi() / 180) * 
-                 sin($this->lat * pi() / 180)) / (cos($Dec * pi() / 180) * 
-                 cos($this->lat * pi() / 180))) * 180 / pi() / 15;
-            
-            // وقت صلاة العصر حسب المذهب الشافعي
-            $X           = $local_noon + $V;
-            $SAsr        = $Dhuhr + $V / 24;
-            $SAsr_h      = (int)($SAsr * 24 * 60 / 60);
-            $SAsr_m      = sprintf('%02d', ($SAsr * 24 * 60) % 60);
-            $prayTime[3] = $SAsr_h.':'.$SAsr_m;
-        } else {
-            // نحسب إرتفاع الشمس لوقت صلاة العصر
-            // حسب المذهب الحنفي
-            $U = atan(2 + tan(abs($this->lat - $Dec) * pi() / 180)) * 180 / pi();
-            
-            // ثم نحسب قوس الدائر أى الوقت المتبقى
-            // من وقت الظهر حتى صلاة العصر
-            // حسب المذهب الحنفي
-            $W = acos((sin((90 - $U) * pi() / 180) - sin($Dec * pi() / 180) * 
-                 sin($this->lat * pi() / 180)) / (cos($Dec * pi() / 180) * 
-                 cos($this->lat * pi() / 180))) * 180 / pi() / 15;
-            
-            // وقت صلاة العصر حسب المذهب الحنفي
-            $Z           = $local_noon + $W;
-            $HAsr        = $Z / 24;
-            $HAsr_h      = (int)($HAsr * 24 * 60 / 60);
-            $HAsr_m      = sprintf('%02d', ($HAsr * 24 * 60) % 60);
-            $prayTime[3] = $HAsr_h.':'.$HAsr_m;
-        }
-        
-        // نحسب نصف قوس النهار
-        $AB = acos((SIN($this->AB2 * pi() / 180) - sin($Dec * pi() / 180) * 
-              sin($this->lat * pi() / 180)) / (cos($Dec * pi() / 180) * 
-              cos($this->lat * pi() / 180))) * 180 / pi();
-        
-        // وقت الشروق
-        $AC          = $local_noon - $AB / 15;
-        $Sunrise     = $AC / 24;
-        $Sunrise_h   = (int)($Sunrise * 24 * 60 / 60);
-        $Sunrise_m   = sprintf('%02d', ($Sunrise * 24 * 60) % 60);
-        $prayTime[1] = $Sunrise_h.':'.$Sunrise_m;
-        
-        // وقت الغروب
-        $AE          = $local_noon + $AB / 15;
-        $Sunset      = $AE / 24;
-        $Sunset_h    = (int)($Sunset * 24 * 60 / 60);
-        $Sunset_m    = sprintf('%02d', ($Sunset * 24 * 60) % 60);
-        $prayTime[4] = $Sunset_h.':'.$Sunset_m;
-        
-        // نحسب فضل الدائر وهو الوقت المتبقى
-        // من وقت صلاة الظهر إلى وقت العشاء
-        $AG = acos((sin($this->AG2 * pi() / 180) - sin($Dec * pi() / 180) * 
-              sin($this->lat * pi() / 180)) / (cos($Dec * pi() / 180) * 
-              cos($this->lat * pi() / 180))) * 180 / pi();
-        
-        // وقت صلاة العشاء
-        $AH          = $local_noon + ($AG / 15);
-        $Isha        = $AH / 24;
-        $Isha_h      = (int)($Isha * 24 * 60 / 60);
-        $Isha_m      = sprintf('%02d', ($Isha * 24 * 60) % 60);
-        $prayTime[5] = $Isha_h.':'.$Isha_m;
-        
-        // نحسب فضل دائر الفجر وهو الوقت المتبقى
-        // من وقت صلاة الفجر حتى وقت صلاة الظهر
-        $AJ = acos((sin($this->AJ2 * pi() / 180) - sin($Dec * pi() / 180) * 
-              sin($this->lat * pi() / 180)) / (cos($Dec * pi() / 180) * 
-              cos($this->lat * pi() / 180))) * 180 / pi();
-        
-        // وقت صلاة الفجر
-        $AK          = $local_noon - $AJ / 15;
-        $Fajr        = $AK / 24;
-        $Fajr_h      = (int)($Fajr * 24 * 60 / 60);
-        $Fajr_m      = sprintf('%02d', ($Fajr * 24 * 60) % 60);
-        $prayTime[0] = $Fajr_h.':'.$Fajr_m;
+        $prayTime = $this->getPrayTime2();
         
         return $prayTime;
     }
     
     /**
-     * Another algorithm (more accurate) to calculate Salat times for the date 
-     * set in setSalatDate methode, and location set in setSalatLocation.
+     * Calculate Salat times for the date set in setSalatDate methode, and 
+     * location set in setSalatLocation.
      *                        
      * @return array of Salat times + sun rise in the following format
      *               hh:mm where hh is the hour in local format and 24 mode
@@ -623,6 +493,7 @@ class I18N_Arabic_Salat
         $n     = -1 * sin(deg2rad($alpha)) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
         $d     = cos(deg2rad($this->lat)) * cos(deg2rad($D));
 
+        // date_sun_info Returns an array with information about sunset/sunrise and twilight begin/end
         $Sunrise = $Dhuhr - (1/15) * rad2deg(acos($n / $d));
         $Sunset  = $Dhuhr + (1/15) * rad2deg(acos($n / $d));
         
