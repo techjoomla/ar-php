@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Changes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="media/style.css">
 </head>
 <body>
@@ -26,7 +27,6 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="ric_1-Install.html">1-Install</a></p>
 					<p><a href="ric_Changes.html">Changes</a></p>
 					<p><a href="ric_GPL.html">GPL</a></p>
 					<p><a href="ric_LGPL.html">LGPL</a></p>
@@ -42,6 +42,47 @@
 
 <h1 align="center">Changes</h1>
 <pre>
+What's new in ArPHP 3.5.0 (release date: Sep 1, 2012)
+-----------------------------------------------------
+
+* More accurate gender detection by add some formats like إفتعال and إفعال as 
+  well as check the list of most common irregular Arabic female names.
+
+* Transliteration from Arabic to English supports now: UNGEGN, UNGEGN+ (i.e. with
+  diaritical marks), RJGC, SES, and ISO 233 standards.
+
+* Enhance Numbers sub class to spell ordering numbers in Arabic idiom also.
+  
+* Add two extra methods into CharsetC sub class to convert Arabic text from UTF-8 
+  and ISO-8859-6 charset into HTML entities named as &quot;iso2html&quot; and &quot;utf2html&quot;.
+  
+* Salat sub class deliver now extra output format by present times in Unix timestamp 
+  to provide users more flexibility in handle it.
+
+* Tag HTML content if it is belong to forum using new &quot;isForum&quot; method, currently it 
+  recognize only vBulletin.
+  
+* Fix the transliteration issue of ال precedes a word beginning with one of the
+  &quot;sun letters&quot;, and issue of ة when it used in combined words to romanized as 
+  t instead of h.
+
+* Fix the question mark issue in the &quot;swapEa&quot; method in the &quot;KeySwap&quot; sub class, thanks
+  to Al-Kindi project team &lt;http://www.ar-php.org/stats/al-kindi&gt; who reported this bug.
+
+* Fix the losing new line issue in the &quot;standard&quot; method in the &quot;Standard&quot; sub class, thanks
+  to Al-Kindi project team &lt;http://www.ar-php.org/stats/al-kindi&gt; who reported this bug.
+
+* Move out &quot;js&quot; sub directory and keyboard example to keep it pure PHP code.
+
+* Replace PNG version of Arabic countries flags by higher resolution SVG version 
+  from Wikipedia.
+
+* Add countries full/long name to the &quot;arab_countries.xml&quot; file.
+  
+* Convert time presented in the &quot;Info.php&quot; example to GMT based on the server time 
+  zone offset.
+
+  
 What's new in ArPHP 3.0.0 beta (release date: Feb 5, 2012)
 -----------------------------------------------------
 
@@ -121,7 +162,7 @@ What's new in ArPHP 2.8 (release date: Apr 14, 2011)
   ArGender, Hiero, ArStemmer, ArSoundex, ArCompressStr, ArCharsetD
   
 * Improve writing error rules using in ArQuery sub class by add case for handle 
-  confusing between &Oslash;&cedil; and &Oslash;&para;.
+  confusing between ظ and ض.
 
 * Improve ArIdentifier sub class by ignore following symbols
   ! &quot; # $ % &amp; ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :
@@ -261,7 +302,7 @@ What's new in ArPHP 2.6 (release date: Mar 15, 2010)
   methods within Arabic class itself.
 
 * Add arNum method to the ArTransliteration sub class to render numbers in given 
-  string using HTML entities that will show them as Indian digits (i.e. &Ugrave;&iexcl;, &Ugrave;&cent;, &Ugrave;&pound;, 
+  string using HTML entities that will show them as Indian digits (i.e. ١, ٢, ٣, 
   etc.) whatever browser language settings are.
 
 * Add enNum method to the EnTransliteration sub class to render numbers in given 
@@ -625,7 +666,7 @@ What's new in ArPHP 1.0 (release date: Feb 24, 2008)
 </pre>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 17 Jan 2012 09:18:04 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
+		    Documentation generated on Wed, 29 Aug 2012 08:32:44 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
 	      </div>
       </td></tr></table>
     </td>

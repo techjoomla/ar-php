@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Docs For Class I18N_Arabic_Numbers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="../media/style.css">
 </head>
 <body>
@@ -26,7 +27,6 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="../ric_1-Install.html">1-Install</a></p>
 					<p><a href="../ric_Changes.html">Changes</a></p>
 					<p><a href="../ric_GPL.html">GPL</a></p>
 					<p><a href="../ric_LGPL.html">LGPL</a></p>
@@ -148,10 +148,12 @@ Source Location: /Arabic/Numbers.php<br /><br />
 <ul>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodgetFeminine">getFeminine</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodgetFormat">getFormat</a></li>
+    <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodgetOrder">getOrder</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodint2indic">int2indic</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodint2str">int2str</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodsetFeminine">setFeminine</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodsetFormat">setFormat</a></li>
+    <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodsetOrder">setOrder</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodsubInt2str">subInt2str</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic_Numbers.html#methodwrittenBlock">writtenBlock</a></li>
   </ul>
@@ -203,7 +205,7 @@ This PHP class spell numbers in the Arabic idiom<br /><br /><br /><br />
 
   <hr />
 	<a name="methodgetFeminine"></a>
-	<h3>method getFeminine <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a229">229</a>]</span></h3>
+	<h3>method getFeminine <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a257">257</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -234,7 +236,7 @@ This PHP class spell numbers in the Arabic idiom<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methodgetFormat"></a>
-	<h3>method getFormat <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a241">241</a>]</span></h3>
+	<h3>method getFormat <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a269">269</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -264,8 +266,39 @@ This PHP class spell numbers in the Arabic idiom<br /><br /><br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetOrder"></a>
+	<h3>method getOrder <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a280">280</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>integer getOrder(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get the ordering flag value<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>return current setting of ordering flag value</td>
+  </tr>
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Khaled Al-Sham'aa &lt;<a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodint2indic"></a>
-	<h3>method int2indic <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a413">413</a>]</span></h3>
+	<h3>method int2indic <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a500">500</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -307,7 +340,7 @@ $number)</code>
   </div>
   <hr />
 	<a name="methodint2str"></a>
-	<h3>method int2str <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a254">254</a>]</span></h3>
+	<h3>method int2str <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a293">293</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -349,7 +382,7 @@ $number)</code>
   </div>
   <hr />
 	<a name="methodsetFeminine"></a>
-	<h3>method setFeminine <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a196">196</a>]</span></h3>
+	<h3>method setFeminine <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a206">206</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -391,7 +424,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodsetFormat"></a>
-	<h3>method setFormat <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a214">214</a>]</span></h3>
+	<h3>method setFormat <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a224">224</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -432,8 +465,50 @@ $value)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodsetOrder"></a>
+	<h3>method setOrder <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a242">242</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>object setOrder(
+integer
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set the ordering flag, is it normal number or ordering number<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>to build a fluent interface</td>
+  </tr>
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Khaled Al-Sham'aa &lt;<a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">integer&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td>Is it an ordering number? default is 1                        (use 1 if no and 2 if yes)</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsubInt2str"></a>
-	<h3>method subInt2str <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a284">284</a>]</span></h3>
+	<h3>method subInt2str <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a331">331</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -481,7 +556,7 @@ $zero = true])</code>
   </div>
   <hr />
 	<a name="methodwrittenBlock"></a>
-	<h3>method writtenBlock <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a356">356</a>]</span></h3>
+	<h3>method writtenBlock <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__ArabicNumbers.php.html#a415">415</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -526,7 +601,7 @@ $number)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 17 Jan 2012 09:18:22 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
+		    Documentation generated on Wed, 29 Aug 2012 08:33:10 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
 	      </div>
       </td></tr></table>
     </td>

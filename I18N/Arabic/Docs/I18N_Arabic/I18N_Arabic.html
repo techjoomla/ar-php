@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Docs For Class I18N_Arabic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="../media/style.css">
 </head>
 <body>
@@ -26,7 +27,6 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="../ric_1-Install.html">1-Install</a></p>
 					<p><a href="../ric_Changes.html">Changes</a></p>
 					<p><a href="../ric_GPL.html">GPL</a></p>
 					<p><a href="../ric_LGPL.html">LGPL</a></p>
@@ -156,6 +156,7 @@ Source Location: /Arabic.php<br /><br />
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodgetInputCharset">getInputCharset</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodgetOutputCharset">getOutputCharset</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodheader">header</a></li>
+    <li><a href="../I18N_Arabic/I18N_Arabic.html#methodisForum">isForum</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodload">load</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodmyErrorHandler">myErrorHandler</a></li>
     <li><a href="../I18N_Arabic/I18N_Arabic.html#methodpregPattern">pregPattern</a></li>
@@ -363,6 +364,48 @@ $conn = null])</code>
         <td class="type">resource&nbsp;&nbsp;</td>
         <td><b>$conn</b>&nbsp;&nbsp;</td>
         <td>The MySQL connection handler/the link identifier</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodisForum"></a>
+	<h3>static method isForum <span class="smalllinenumber">[line <a href="../__filesource/fsource_I18N_Arabic__Arabic.php.html#a613">613</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>static boolean isForum(
+string
+$html)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		There is still a lack of original, localized, high-quality content and well-structured  Arabic websites; This method help in tag HTML result pages from Arabic forum to enable  filter it in/out.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>True if the input HTML is belong to a forum page</td>
+  </tr>
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Khaled Al-Shamaa &lt;<a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$html</b>&nbsp;&nbsp;</td>
+        <td>The HTML content of the page in question</td>
       </tr>
         </table>
     </div><br />
@@ -908,7 +951,7 @@ $arguments)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 17 Jan 2012 09:18:06 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
+		    Documentation generated on Wed, 29 Aug 2012 08:32:46 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
 	      </div>
       </td></tr></table>
     </td>

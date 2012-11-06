@@ -23,7 +23,6 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="ric_1-Install.html">1-Install</a></p>
 					<p><a href="ric_Changes.html">Changes</a></p>
 					<p><a href="ric_GPL.html">GPL</a></p>
 					<p><a href="ric_LGPL.html">LGPL</a></p>
@@ -237,6 +236,8 @@
 				<dd>in file Query.php, method <a href="I18N_Arabic/I18N_Arabic_Query.html#methodgetMode">I18N_Arabic_Query::getMode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Getting $mode propority value that refer to search mode  [0 for OR logic | 1 for AND logic]</dd>
 							<dt><b>getMode</b></dt>
 				<dd>in file Date.php, method <a href="I18N_Arabic/I18N_Arabic_Date.html#methodgetMode">I18N_Arabic_Date::getMode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Getting $mode value that refer to output mode format</dd>
+							<dt><b>getOrder</b></dt>
+				<dd>in file Numbers.php, method <a href="I18N_Arabic/I18N_Arabic_Numbers.html#methodgetOrder">I18N_Arabic_Numbers::getOrder()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the ordering flag value</dd>
 							<dt><b>getOrderBy</b></dt>
 				<dd>in file Query.php, method <a href="I18N_Arabic/I18N_Arabic_Query.html#methodgetOrderBy">I18N_Arabic_Query::getOrderBy()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get more relevant order by section related to the user search keywords</dd>
 							<dt><b>getOutputCharset</b></dt>
@@ -357,6 +358,8 @@
 				<dd>in file Identifier.php, method <a href="I18N_Arabic/I18N_Arabic_Identifier.html#methodisArabic">I18N_Arabic_Identifier::isArabic()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Find out if given string is Arabic text or not</dd>
 							<dt><b>isFemale</b></dt>
 				<dd>in file Gender.php, method <a href="I18N_Arabic/I18N_Arabic_Gender.html#methodisFemale">I18N_Arabic_Gender::isFemale()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if Arabic word is feminine</dd>
+							<dt><b>isForum</b></dt>
+				<dd>in file Arabic.php, method <a href="I18N_Arabic/I18N_Arabic.html#methodisForum">I18N_Arabic::isForum()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;There is still a lack of original, localized, high-quality content and well-structured  Arabic websites; This method help in tag HTML result pages from Arabic forum to enable  filter it in/out.</dd>
 							<dt><b>isHamza</b></dt>
 				<dd>in file Normalise.php, method <a href="I18N_Arabic/I18N_Arabic_Normalise.html#methodisHamza">I18N_Arabic_Normalise::isHamza()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks for Arabic Hamza forms (i.e. HAMZA, WAW HAMZA, YEH HAMZA, HAMZA ABOVE, HAMZA BELOW, ALEF HAMZA BELOW, ALEF HAMZA ABOVE).</dd>
 							<dt><b>isHaraka</b></dt>
@@ -371,6 +374,8 @@
 				<dd>in file Normalise.php, method <a href="I18N_Arabic/I18N_Arabic_Normalise.html#methodisMoon">I18N_Arabic_Normalise::isMoon()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks for Arabic Moon letters.</dd>
 							<dt><b>isNoun</b></dt>
 				<dd>in file WordTag.php, method <a href="I18N_Arabic/I18N_Arabic_WordTag.html#methodisNoun">I18N_Arabic_WordTag::isNoun()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if given rabic word is noun or not</dd>
+							<dt><b>iso2html</b></dt>
+				<dd>in file CharsetC.php, method <a href="I18N_Arabic/I18N_Arabic_CharsetC.html#methodiso2html">I18N_Arabic_CharsetC::iso2html()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert Arabic string from ISO-8859-6 to HTML entities format</dd>
 							<dt><b>iso2utf</b></dt>
 				<dd>in file CharsetC.php, method <a href="I18N_Arabic/I18N_Arabic_CharsetC.html#methodiso2utf">I18N_Arabic_CharsetC::iso2utf()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert Arabic string from ISO-8859-6 to UTF-8 format</dd>
 							<dt><b>iso2win</b></dt>
@@ -550,9 +555,11 @@
 							<dt><b>setLocation</b></dt>
 				<dd>in file Salat.php, method <a href="I18N_Arabic/I18N_Arabic_Salat.html#methodsetLocation">I18N_Arabic_Salat::setLocation()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Setting location information for Salat calculation</dd>
 							<dt><b>setMode</b></dt>
-				<dd>in file Date.php, method <a href="I18N_Arabic/I18N_Arabic_Date.html#methodsetMode">I18N_Arabic_Date::setMode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Setting value for $mode scalar</dd>
-							<dt><b>setMode</b></dt>
 				<dd>in file Query.php, method <a href="I18N_Arabic/I18N_Arabic_Query.html#methodsetMode">I18N_Arabic_Query::setMode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Setting $mode propority value that refer to search mode  [0 for OR logic | 1 for AND logic]</dd>
+							<dt><b>setMode</b></dt>
+				<dd>in file Date.php, method <a href="I18N_Arabic/I18N_Arabic_Date.html#methodsetMode">I18N_Arabic_Date::setMode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Setting value for $mode scalar</dd>
+							<dt><b>setOrder</b></dt>
+				<dd>in file Numbers.php, method <a href="I18N_Arabic/I18N_Arabic_Numbers.html#methodsetOrder">I18N_Arabic_Numbers::setOrder()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the ordering flag, is it normal number or ordering number</dd>
 							<dt><b>setOutputCharset</b></dt>
 				<dd>in file Arabic.php, method <a href="I18N_Arabic/I18N_Arabic.html#methodsetOutputCharset">I18N_Arabic::setOutputCharset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set charset used in class output Arabic strings</dd>
 							<dt><b>setStrFields</b></dt>
@@ -609,6 +616,8 @@
 				<dd>in file Normalise.php, method <a href="I18N_Arabic/I18N_Arabic_Normalise.html#methodunichr">I18N_Arabic_Normalise::unichr()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return unicode char by its code point.</dd>
 							<dt><b>unshape</b></dt>
 				<dd>in file Normalise.php, method <a href="I18N_Arabic/I18N_Arabic_Normalise.html#methodunshape">I18N_Arabic_Normalise::unshape()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes Arabic text in its joined form, it untangles the characters  and  unshapes them.</dd>
+							<dt><b>utf2html</b></dt>
+				<dd>in file CharsetC.php, method <a href="I18N_Arabic/I18N_Arabic_CharsetC.html#methodutf2html">I18N_Arabic_CharsetC::utf2html()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert Arabic string from UTF-8 to HTML entities format</dd>
 							<dt><b>utf2iso</b></dt>
 				<dd>in file CharsetC.php, method <a href="I18N_Arabic/I18N_Arabic_CharsetC.html#methodutf2iso">I18N_Arabic_CharsetC::utf2iso()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert Arabic string from UTF-8 to ISO-8859-6 format</dd>
 							<dt><b>utf2win</b></dt>
@@ -660,7 +669,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 17 Jan 2012 09:18:04 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
+		    Documentation generated on Wed, 29 Aug 2012 08:32:43 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.0</a>
 	      </div>
       </td></tr></table>
     </td>
