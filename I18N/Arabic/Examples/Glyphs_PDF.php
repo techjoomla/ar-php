@@ -14,9 +14,9 @@
 header('Content-type: application/pdf');
 
 /*
- * Needed by fpdf library not by ArPHP library
+ * Needed for fpdf library not for ArPHP library
  */
-error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 
 date_default_timezone_set('UTC');
 
@@ -44,7 +44,7 @@ $text .= "\n\nخالد الشمعة khaled@ar-php.org والموقع هو http:/
 //$text = 'The title is "عصر الأجاكس!" in Arabic';
 //$text = ' مؤسسة (World Wide Web Consortium) W3C';
 //$text = ' ماذا لو كانت الجملة تنتهي بكلمة إنجليزية مثل Test?';
-//$text = 'لَاريب';
+//$text = 'مُوسَىٰ وَعِيسَىٰ ';
 
 $font_size = 16;
 $chars_in_line = $Arabic->a4MaxChars($font_size);

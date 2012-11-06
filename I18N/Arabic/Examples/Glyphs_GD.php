@@ -38,7 +38,7 @@ imagettftext($im, 20, 0, 250, 50, $black, $font, $text);
 require '../../Arabic.php';
 $Arabic = new I18N_Arabic('Glyphs');
 
-$text = ' بسم الله الرحمن الرحيم';
+$text = 'بسم الله الرحمن الرحيم';
 $text = $Arabic->utf8Glyphs($text);
 
 imagettftext($im, 20, 0, 10, 100, $blue, $font, 'Arabic Glyphs:');

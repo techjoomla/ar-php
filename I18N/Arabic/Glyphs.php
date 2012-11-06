@@ -217,6 +217,7 @@ class I18N_Arabic_Glyphs
 
         for ($i = $max - 1; $i >= 0; $i--) {
             $crntChar = $chars[$i];
+            $prevChar = ' ';
             
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
@@ -268,8 +269,9 @@ class I18N_Arabic_Glyphs
             
             $form = 0;
             
-            //if ($prevChar == 'لا' && (mb_strpos('آأإا', $crntChar) !== false)) {
-            if ($prevChar == 'ل' && (mb_strpos('آأإا', $crntChar) !== false)) {
+            if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ' || $prevChar == 'لإ' || $prevChar == 'ل') 
+                && (mb_strpos('آأإا', $crntChar) !== false)) {
+
                 if (mb_strpos($this->_prevLink, $chars[$i - 2]) !== false) {
                     $form++;
                 }
