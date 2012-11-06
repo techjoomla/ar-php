@@ -63,7 +63,6 @@ highlight_string($code);
 <h2 dir="ltr">Example Output 2:</h2>
 <?php
     $str = "ِىغ هىفثممهلثىف بخخم ؤشى ةشنث فاهىلس لاهللثق ةخقث ؤخةحمثء شىي ةخقث رهخمثىفز ÷ف فشنثس ش فخعؤا خب لثىهعس شىي ش مخف خب ؤخعقشلث فخ ةخرث هى فاث خححخسهفث يهقثؤفهخىز";
-    
     echo "<u><i>Before:</i></u><br />$str<br /><br />";
     
     $text = $Arabic->swapAe($str);

@@ -108,8 +108,8 @@ class I18N_Arabic_KeySwap
 {
     // First 12 chars replaced by 1 Byte in Arabic keyboard 
     // while rest replaced by 2 Bytes UTF8
-    private static $_swapEn = '{}DFL:"ZCV<>`qwertyuiop[]asdfghjkl;\'zxcvnm,./~QWERYIOPASHJKXNM?';
-    private static $_swapAr = '<>][/:"~}{,.ذضصثقفغعهخحجدشسيبلاتنمكطئءؤرىةوزظًٌَُّإ÷×؛ٍِأـ،ْآ’؟';
+    private static $_swapEn = '{}DFL:"ZCV<>`qwertyuiop[]asdfghjkl;\'zxcvnm,./~QWERYIOPASHJKXN?M';
+    private static $_swapAr = '<>][/:"~}{,.ذضصثقفغعهخحجدشسيبلاتنمكطئءؤرىةوزظًٌَُّإ÷×؛ٍِأـ،ْآ؟’';
     
     private static $_swapFr       = '²azertyuiop^$qsdfghjklmù*<wxcvn,;:!²1234567890°+AZERYIOP¨£QSDFHJKLM%µ<WXCVN?./§';
     private static $_swapArAzerty = '>ضصثقفغعهخحجدشسيبلاتنمكطذ\\ئءؤرىةوزظ>&é"\'(-è_çà)=ضصثقغهخحجدشسيباتنمكطذ\\ئءؤرىةوزظ';  
@@ -218,7 +218,9 @@ class I18N_Arabic_KeySwap
                     $adjPos = ($pos - 12)*2 + 12;
                     $len    = 2; 
                 }
-
+                if($adjPos == 112) {
+                    $len = 3;
+                }
                 $output .= substr(self::$_swapAr, $adjPos, $len);
             }
         }
