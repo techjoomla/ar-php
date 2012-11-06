@@ -129,6 +129,7 @@ class I18N_Arabic_Numbers
     private $_complications = array();
     private $_arabicIndic   = array();
     private $_ordering      = array();
+    private $_currency      = array();
     private $_feminine      = 1;
     private $_format        = 1;
     private $_order         = 1;
@@ -191,7 +192,17 @@ class I18N_Arabic_Numbers
 
         foreach ($xml->xpath("//order/number[@gender='female']") as $num) {
             $this->_ordering["{$num['value']}"][2] = (string)$num;
-        } 
+        }
+        
+        $xml = simplexml_load_file(dirname(__FILE__).'/data/arab_countries.xml');
+        
+        foreach ($xml->xpath("//currency") as $info) {
+            $this->_currency["{$info->iso}"]['ar']['basic']    = $info->money->arabic->basic;
+            $this->_currency["{$info->iso}"]['ar']['fraction'] = $info->money->arabic->fraction;
+            $this->_currency["{$info->iso}"]['en']['basic']    = $info->money->english->basic;
+            $this->_currency["{$info->iso}"]['en']['fraction'] = $info->money->english->fraction;
+            $this->_currency["{$info->iso}"]['decimals']       = $info->money->decimals;
+        }
     }
     
     /**
@@ -314,6 +325,31 @@ class I18N_Arabic_Numbers
                 $dec     = $this->subInt2str($temp[1]);
                 $string .= ' فاصلة ' . $dec; 
             }
+        }
+        
+        return $string;
+    }
+    
+    public function money2str($number, $iso='SYP', $lang='ar')
+    {
+        $iso  = strtoupper($iso);
+        $lang = strtolower($lang);
+        
+        $number = sprintf("%01.{$this->_currency[$iso]['decimals']}f", $number);
+        $temp   = explode('.', $number);
+
+        $string  = $this->subInt2str($temp[0]);
+        $string .= ' ' . $this->_currency[$iso][$lang]['basic'];
+
+        if (!empty($temp[1])) {
+            if ($lang == 'ar') {
+                $string .= ' و ';
+            } else {
+                $string .= ' and ';
+            }
+            
+            $string .= $this->subInt2str((int)$temp[1]); 
+            $string .= ' ' . $this->_currency[$iso][$lang]['fraction'];
         }
         
         return $string;
