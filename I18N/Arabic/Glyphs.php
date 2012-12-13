@@ -121,10 +121,10 @@ class I18N_Arabic_Glyphs
          $this->_glyphs['ْ']  = array('FE7E','FE7E');
          */
          
-        $this->_glyphs = 'ًٌٍَُِّْ';
+        $this->_glyphs = 'ًٌٍَُِّْٰ';
         $this->_hex    = '064B064B064B064B064C064C064C064C064D064D064D064D064E064E';
         $this->_hex   .= '064E064E064F064F064F064F06500650065006500651065106510651';
-        $this->_hex   .= '0652065206520652';
+        $this->_hex   .= '06520652065206520670067006700670';
 
         $this->_glyphs .= 'ءآأؤإئاب';
         $this->_hex    .= 'FE80FE80FE80FE80FE81FE82FE81FE82FE83FE84FE83FE84FE85FE86';
@@ -163,7 +163,9 @@ class I18N_Arabic_Glyphs
         // Example:     $text = 'نمونة قلم: لاگچ ژافپ';
         // Email Yossi Beck <yosbeck@gmail.com> ask him to save that example
         // string using ANSI encoding in Notepad
-
+        $this->_glyphs .= '';
+        $this->_hex    .= '';
+        
         $this->_glyphs .= 'لآلألإلا';
         $this->_hex    .= 'FEF5FEF6FEF5FEF6FEF7FEF8FEF7FEF8FEF9FEFAFEF9FEFAFEFBFEFC';
         $this->_hex    .= 'FEFBFEFC';
@@ -182,8 +184,8 @@ class I18N_Arabic_Glyphs
 
         $pos = mb_strpos($this->_glyphs, $char);
         
-        if ($pos > 48) {
-            $pos = ($pos-48)/2 + 48;
+        if ($pos > 49) {
+            $pos = ($pos-49)/2 + 49;
         }
         
         $pos = $pos*16 + $type*4;
@@ -276,7 +278,11 @@ class I18N_Arabic_Glyphs
                     $form++;
                 }
                 
-                $output  .= '&#x'.$this->getGlyphs($prevChar.$crntChar, $form).';';
+                if (mb_strpos($this->_vowel, $chars[$i - 1])) {
+                    $output  .= '&#x'.$this->getGlyphs($crntChar, $form).';';
+                } else {
+                    $output  .= '&#x'.$this->getGlyphs($prevChar.$crntChar, $form).';';
+                }
                 $nextChar = $prevChar;
                 continue;
             }

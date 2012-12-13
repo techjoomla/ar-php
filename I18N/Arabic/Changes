@@ -17,11 +17,12 @@ What's new in ArPHP 3.6.0 (release date: ####)
 * Fix the Glyphs bug when render the shape of the first letter in the input string just 
   like letter in the middle of word! Thanks to Mr. Shady Massalha <massalha@yahoo.com>.
   
-(*) Fix Glyphs bug when we have Tashkeel within لا, لآ, لأ, or لإ which rendered incorrectly 
+* Fix Glyphs bug when we have Tashkeel within لا, لآ, لأ, or لإ which rendered incorrectly 
   by add extra Lam before, thanks to Mr. Said Bakr <saidbakr2@users.sourceforge.net> 
-  who reported this bug and fix it.
+  who reported this bug and help in fix it.
 
-(*) Fix Glyphs bug when we have مُوسَىٰ وَعِيسَىٰ where it presents as Tanween!
+* Fix Glyphs bug when handle the Arabic letter superscript Alef if supported by used font 
+  (i.e. just like what we have in مُوسَىٰ وَعِيسَىٰ) which was presented as Tanween before!
 
 * Extend writing error rules using in ArQuery sub class by add cases to handle
   extended Arabic letters (i.e. ژ, ڨ, پ, چ, گ, and ڪ), thanks to Ammar Abdelhamid 
@@ -29,14 +30,6 @@ What's new in ArPHP 3.6.0 (release date: ####)
 
 * Reduce the size of Salat sub class by 20% by remove deprecated "getPrayTime"algorithm, 
   that method name is now just an alias of the new "getPrayTime2" method.
-
-(*) Convert all GIF to PNG for GNU!
-
-(*) Move out SVG flags, arab_countries.xml, and cities.db to be in extra add-in.
-
-(*) Maintainer Mr. Anas R. <anas.ram@gmail.com> and Debian distribution
-
-(*) Maintainer Mr. Tawfek Daghistani <tawfekov@gmail.com> and Composer (http://getcomposer.org/doc/00-intro.md) distribution https://packagist.org/packages/ar-php/ar-php
 
 
 What's new in ArPHP 3.5.0 (release date: Sep 1, 2012)
