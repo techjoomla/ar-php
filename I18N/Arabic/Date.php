@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2012 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -146,7 +146,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -169,7 +169,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -349,11 +349,16 @@ class I18N_Arabic_Date
             array_push($replacements, (string)$day);
         } 
 
-        foreach ($this->_xml->xpath("//en_month/mode[@id='full']/search") as $month) {
+        foreach (
+            $this->_xml->xpath("//en_month/mode[@id='full']/search") as $month
+        ) {
             array_push($patterns, (string)$month);
         } 
 
-        $replacements = array_merge($replacements, $this->arabicMonths($this->_mode));
+        $replacements = array_merge(
+            $replacements, 
+            $this->arabicMonths($this->_mode)
+        );
         
         foreach ($this->_xml->xpath("//en_day/mode[@id='short']/search") as $day) {
             array_push($patterns, (string)$day);
@@ -367,9 +372,14 @@ class I18N_Arabic_Date
             array_push($patterns, (string)$m);
         } 
         
-        $replacements = array_merge($replacements, $this->arabicMonths($this->_mode));
+        $replacements = array_merge(
+            $replacements, 
+            $this->arabicMonths($this->_mode)
+        );
     
-        foreach ($this->_xml->xpath("//preg_replace[@function='en2ar']/pair") as $p) {
+        foreach (
+            $this->_xml->xpath("//preg_replace[@function='en2ar']/pair") as $p
+        ) {
             array_push($patterns, (string)$p->search);
             array_push($replacements, (string)$p->replace);
         } 
@@ -397,7 +407,9 @@ class I18N_Arabic_Date
     {
         $replacements = array();
 
-        foreach ($this->_xml->xpath("//ar_month/mode[@id=$mode]/replace") as $month) {
+        foreach (
+            $this->_xml->xpath("//ar_month/mode[@id=$mode]/replace") as $month
+        ) {
             array_push($replacements, (string)$month);
         } 
 
@@ -416,7 +428,7 @@ class I18N_Arabic_Date
      */
     protected function hjConvert($Y, $M, $D)
     {
-        if (function_exists(GregorianToJD)) {
+        if (function_exists('GregorianToJD')) {
             $jd = GregorianToJD($M, $D, $Y);
         } else {
             $jd = $this->gregToJd($M, $D, $Y);
@@ -440,8 +452,10 @@ class I18N_Arabic_Date
         $l = (int)$jd - 1948440 + 10632;
         $n = (int)(($l - 1) / 10631);
         $l = $l - 10631 * $n + 354;
-        $j = (int)((10985 - $l) / 5316) * (int)((50 * $l) / 17719) + (int)($l / 5670) * (int)((43 * $l) / 15238);
-        $l = $l - (int)((30 - $j) / 15) * (int)((17719 * $j) / 50) - (int)($j / 16) * (int)((15238 * $j) / 43) + 29;
+        $j = (int)((10985 - $l) / 5316) * (int)((50 * $l) / 17719) 
+            + (int)($l / 5670) * (int)((43 * $l) / 15238);
+        $l = $l - (int)((30 - $j) / 15) * (int)((17719 * $j) / 50) 
+            - (int)($j / 16) * (int)((15238 * $j) / 43) + 29;
         $m = (int)((24 * $l) / 709);
         $d = $l - (int)((709 * $m) / 24);
         $y = (int)(30 * $n + $j - 30);
@@ -461,7 +475,8 @@ class I18N_Arabic_Date
      */
     protected function islamicToJd($year, $month, $day)
     {
-        $jd = (int)((11 * $year + 3) / 30) + (int)(354 * $year) + (int)(30 * $month) - (int)(($month - 1) / 2) + $day + 1948440 - 385;
+        $jd = (int)((11 * $year + 3) / 30) + (int)(354 * $year) + (int)(30 * $month) 
+            - (int)(($month - 1) / 2) + $day + 1948440 - 385;
         return $jd;
     }
     
@@ -483,7 +498,9 @@ class I18N_Arabic_Date
             $m += 12;
         }
         
-        if (($y < 1582) || ($y == 1582 && $m < 10) || ($y == 1582 && $m == 10 && $d <= 15)) {
+        if (($y < 1582) || ($y == 1582 && $m < 10) 
+            || ($y == 1582 && $m == 10 && $d <= 15)
+        ) {
             // This is ignored in the GregorianToJD PHP function!
             $b = 0;
         } else {
@@ -491,7 +508,8 @@ class I18N_Arabic_Date
             $b = 2 - $a + (int)($a / 4);
         }
         
-        $jd = (int)(365.25 * ($y + 4716)) + (int)(30.6001 * ($m + 1)) + $d + $b - 1524.5;
+        $jd = (int)(365.25 * ($y + 4716)) + (int)(30.6001 * ($m + 1)) 
+            + $d + $b - 1524.5;
         
         return round($jd);
     }

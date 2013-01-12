@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2012 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -100,7 +100,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -123,7 +123,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -156,9 +156,9 @@ class I18N_Arabic_Mktime
      *                seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function mktime($hour, $minute, $second, 
-                          $hj_month, $hj_day, $hj_year, $correction = 0)
-    {
+    public function mktime(
+        $hour, $minute, $second, $hj_month, $hj_day, $hj_year, $correction = 0
+    ) {
         list($year, $month, $day) = $this->convertDate($hj_year, $hj_month, $hj_day);
 
         $unixTimeStamp = mktime($hour, $minute, $second, $month, $day, $year);
@@ -180,7 +180,7 @@ class I18N_Arabic_Mktime
      */
     protected function convertDate($Y, $M, $D)
     {
-        if (function_exists(GregorianToJD)) {
+        if (function_exists('GregorianToJD')) {
             $str = JDToGregorian($this->islamicToJd($Y, $M, $D));
         } else {
             $str = $this->jdToGreg($this->islamicToJd($Y, $M, $D));
@@ -203,7 +203,8 @@ class I18N_Arabic_Mktime
      */
     protected function islamicToJd($year, $month, $day)
     {
-        $jd = (int)((11 * $year + 3) / 30) + (int)(354 * $year) + (int)(30 * $month) - (int)(($month - 1) / 2) + $day + 1948440 - 385;
+        $jd = (int)((11 * $year + 3) / 30) + (int)(354 * $year) + (int)(30 * $month) 
+            - (int)(($month - 1) / 2) + $day + 1948440 - 385;
         return $jd;
     }
     
@@ -290,7 +291,8 @@ class I18N_Arabic_Mktime
      * Calculate how many days in a given Hijri month
      *      
      * @param integer $m         Hijri month (Islamic calendar)
-     * @param integer $y         Hijri year  (Islamic calendar), valid range[1320-1459]
+     * @param integer $y         Hijri year  (Islamic calendar), valid 
+     *                           range[1320-1459]
      * @param boolean $umAlqoura Should we implement Um-Al-Qura calendar correction
      *                           in this calculation (default value is true)
      *       

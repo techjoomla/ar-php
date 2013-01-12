@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2012 Khaled Al-Sham'aa
+ * Copyright (c) 2006-2013 Khaled Al-Sham'aa
  *  
  * http://www.ar-php.org
  *  
@@ -149,7 +149,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -173,7 +173,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -360,9 +360,10 @@ class I18N_Arabic_Salat
      * @return object $this to build a fluent interface
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function setConf($sch = 'Shafi', $sunriseArc = -0.833333, 
-                            $ishaArc = -17.5, $fajrArc = -19.5, $view = 'Sunni')
-    {
+    public function setConf(
+        $sch = 'Shafi', $sunriseArc = -0.833333, $ishaArc = -17.5, 
+        $fajrArc = -19.5, $view = 'Sunni'
+    ) {
         $sch = ucfirst($sch);
         
         if ($sch == 'Shafi' || $sch == 'Hanafi') {
@@ -436,7 +437,8 @@ class I18N_Arabic_Salat
         $A = floor($year / 100);
         $B = 2 - $A + floor($A / 4);
 
-        $jd = floor(365.25 * ($year + 4716)) + floor(30.6001 * ($month + 1)) + $this->day + $B - 1524.5;
+        $jd = floor(365.25 * ($year + 4716)) + floor(30.6001 * ($month + 1)) 
+                + $this->day + $B - 1524.5;
         
         // The following algorithm from U.S. Naval Observatory computes the 
         // Sun's angular coordinates to an accuracy of about 1 arcminute within 
@@ -460,7 +462,8 @@ class I18N_Arabic_Salat
         $R = 1.00014 - 0.01671 * cos(deg2rad($g)) - 0.00014 * cos(deg2rad(2 * $g));
         $e = 23.439 - 0.00000036 * $d;
         
-        $RA = rad2deg(atan2(cos(deg2rad($e))* sin(deg2rad($L)), cos(deg2rad($L))))/ 15;
+        $RA = rad2deg(atan2(cos(deg2rad($e))* sin(deg2rad($L)), cos(deg2rad($L))))
+            / 15;
         if ($RA < 0) {
             $RA = 24 + $RA;
         }
@@ -469,9 +472,10 @@ class I18N_Arabic_Salat
         // the plane of the earth equator. The declination of the Sun changes 
         // continuously throughout the year. This is a consequence of the Earth's 
         // tilt, i.e. the difference in its rotational and revolutionary axes. 
-        $D = rad2deg(asin(sin(deg2rad($e))* sin(deg2rad($L))));  // declination of the Sun
+        // declination of the Sun
+        $D = rad2deg(asin(sin(deg2rad($e))* sin(deg2rad($L))));  
         
-        // The equation of time is the difference between time as read from a sundial 
+        // The equation of time is the difference between time as read from sundial 
         // and a clock. It results from an apparent irregular movement of the Sun 
         // caused by a combination of the obliquity of the Earth's rotation axis 
         // and the eccentricity of its orbit. The sundial can be ahead (fast) by 
@@ -490,22 +494,26 @@ class I18N_Arabic_Salat
         // constant 0.833 by 0.0347 × sqrt(elevation), where elevation is the  
         // observer's height in meters. 
         $alpha = 0.833 + 0.0347 * sqrt($this->elevation);
-        $n     = -1 * sin(deg2rad($alpha)) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
-        $d     = cos(deg2rad($this->lat)) * cos(deg2rad($D));
+        $n = -1 * sin(deg2rad($alpha)) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+        $d = cos(deg2rad($this->lat)) * cos(deg2rad($D));
 
-        // date_sun_info Returns an array with information about sunset/sunrise and twilight begin/end
+        // date_sun_info Returns an array with information about sunset/sunrise 
+        // and twilight begin/end
         $Sunrise = $Dhuhr - (1/15) * rad2deg(acos($n / $d));
         $Sunset  = $Dhuhr + (1/15) * rad2deg(acos($n / $d));
         
         // Fajr & Isha
-        // Imsak    The time to stop eating Sahur (for fasting), slightly before Fajr.
-        // Fajr     When the sky begins to lighten (dawn).
-        // Isha      The time at which darkness falls and there is no scattered light in the sky. 
-        $n     = -1 * sin(deg2rad(abs($this->AJ2))) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+        // Imsak: The time to stop eating Sahur (for fasting), slightly before Fajr.
+        // Fajr:  When the sky begins to lighten (dawn).
+        // Isha:  The time at which darkness falls and there is no scattered light 
+        //        in the sky. 
+        $n     = -1 * sin(deg2rad(abs($this->AJ2))) - sin(deg2rad($this->lat)) 
+                * sin(deg2rad($D));
         $Fajr  = $Dhuhr - (1/15) * rad2deg(acos($n / $d));
         $Imsak = $Fajr - (10/60);
         
-        $n    = -1 * sin(deg2rad(abs($this->AG2))) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+        $n    = -1 * sin(deg2rad(abs($this->AG2))) - sin(deg2rad($this->lat)) 
+                * sin(deg2rad($D));
         $Isha = $Dhuhr + (1/15) * rad2deg(acos($n / $d));
         
         // Asr
@@ -513,9 +521,11 @@ class I18N_Arabic_Salat
         // and the time at which the object's shadow equals t times the length of 
         // the object itself plus the length of that object's shadow at noon
         if ($this->school == 'Shafi') {
-            $n = sin(atan(1/(1 + tan(deg2rad($this->lat - $D))))) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+            $n = sin(atan(1/(1 + tan(deg2rad($this->lat - $D))))) 
+                - sin(deg2rad($this->lat)) * sin(deg2rad($D));
         } else {
-            $n = sin(atan(1/(2 + tan(deg2rad($this->lat - $D))))) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+            $n = sin(atan(1/(2 + tan(deg2rad($this->lat - $D))))) 
+                - sin(deg2rad($this->lat)) * sin(deg2rad($D));
         }
         $Asr = $Dhuhr + (1/15) * rad2deg(acos($n / $d));
         
@@ -528,7 +538,7 @@ class I18N_Arabic_Salat
         // In the Shia's view, however, the dominant opinion is that as long as 
         // the redness in the eastern sky appearing after sunset has not passed 
         // overhead, Maghrib prayer should not be performed.
-        $n           = -1 * sin(deg2rad(4)) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
+        $n = -1 * sin(deg2rad(4)) - sin(deg2rad($this->lat)) * sin(deg2rad($D));
         $MaghribShia = $Dhuhr + (1/15) * rad2deg(acos($n / $d));
         
         if ($this->view == 'Sunni') {
@@ -557,7 +567,8 @@ class I18N_Arabic_Salat
             $Midnight = $MidnightShia;
         }
 
-        $times = array($Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib, $Isha, $Sunset, $Midnight, $Imsak);
+        $times = array($Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib, $Isha, $Sunset, 
+                $Midnight, $Imsak);
         
         // Convert number after the decimal point into minutes 
         foreach ($times as $index => $time) {
@@ -599,7 +610,8 @@ class I18N_Arabic_Salat
 
         $numerator   = sin(deg2rad($K_longitude - $longitude));
         $denominator = (cos(deg2rad($latitude)) * tan(deg2rad($K_latitude))) -
-                       (sin(deg2rad($latitude)) * cos(deg2rad($K_longitude - $longitude)));
+                       (sin(deg2rad($latitude)) 
+                       * cos(deg2rad($K_longitude - $longitude)));
 
         $q = atan($numerator / $denominator);
         $q = rad2deg($q);

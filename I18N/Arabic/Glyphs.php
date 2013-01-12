@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2012 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -63,7 +63,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -86,7 +86,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -243,8 +243,9 @@ class I18N_Arabic_Glyphs
                 $Reversed = false;
             }
             
-            if ($crntChar && !$Reversed && 
-                (mb_strpos($ReversedChr, $crntChar) !== false)) {
+            if ($crntChar && !$Reversed 
+                && (mb_strpos($ReversedChr, $crntChar) !== false)
+            ) {
                 $crntChar = $flip_arr[mb_strpos($ReversedChr, $crntChar)];
             }
             
@@ -254,14 +255,16 @@ class I18N_Arabic_Glyphs
                 continue;
             }
             
-            if ($crntChar == 'ل' && isset($chars[$i + 1]) && 
-                (mb_strpos('آأإا', $chars[$i + 1]) !== false)) {
+            if ($crntChar == 'ل' && isset($chars[$i + 1]) 
+                && (mb_strpos('آأإا', $chars[$i + 1]) !== false)
+            ) {
                 continue;
             }
             
             if ($crntChar && mb_strpos($this->_vowel, $crntChar) !== false) {
-                if ((mb_strpos($this->_nextLink, $chars[$i + 1]) !== false) && 
-                    (mb_strpos($this->_prevLink, $prevChar) !== false)) {
+                if ((mb_strpos($this->_nextLink, $chars[$i + 1]) !== false) 
+                    && (mb_strpos($this->_prevLink, $prevChar) !== false)
+                ) {
                     $output .= '&#x' . $this->getGlyphs($crntChar, 1) . ';';
                 } else {
                     $output .= '&#x' . $this->getGlyphs($crntChar, 0) . ';';
@@ -271,17 +274,20 @@ class I18N_Arabic_Glyphs
             
             $form = 0;
             
-            if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ' || $prevChar == 'لإ' || $prevChar == 'ل') 
-                && (mb_strpos('آأإا', $crntChar) !== false)) {
-
+            if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ' 
+                || $prevChar == 'لإ' || $prevChar == 'ل') 
+                && (mb_strpos('آأإا', $crntChar) !== false)
+            ) {
                 if (mb_strpos($this->_prevLink, $chars[$i - 2]) !== false) {
                     $form++;
                 }
                 
                 if (mb_strpos($this->_vowel, $chars[$i - 1])) {
-                    $output  .= '&#x'.$this->getGlyphs($crntChar, $form).';';
+                    $output .= '&#x';
+                    $output .= $this->getGlyphs($crntChar, $form).';';
                 } else {
-                    $output  .= '&#x'.$this->getGlyphs($prevChar.$crntChar, $form).';';
+                    $output .= '&#x';
+                    $output .= $this->getGlyphs($prevChar.$crntChar, $form).';';
                 }
                 $nextChar = $prevChar;
                 continue;
@@ -511,18 +517,34 @@ class I18N_Arabic_Glyphs
         
         $output = $this->preConvert($output);
         if ($hindo) {
-            $nums   = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-            $arNums = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
+            $nums   = array(
+                '0', '1', '2', '3', '4', 
+                '5', '6', '7', '8', '9'
+            );
+            $arNums = array(
+                '٠', '١', '٢', '٣', '٤',
+                '٥', '٦', '٧', '٨', '٩'
+            );
             
-            foreach ($nums as $k => $v) $p_nums[$k] = '/'.$v.'/ui';
+            foreach ($nums as $k => $v) {
+                $p_nums[$k] = '/'.$v.'/ui';
+            }
             $output = preg_replace($p_nums, $arNums, $output);
             
-            foreach ($arNums as $k => $v) $p_arNums[$k] = '/([a-z-\d]+)'.$v.'/ui';
-            foreach ($nums as $k => $v) $r_nums[$k] = '${1}'.$v;
+            foreach ($arNums as $k => $v) {
+                $p_arNums[$k] = '/([a-z-\d]+)'.$v.'/ui';
+            }
+            foreach ($nums as $k => $v) {
+                $r_nums[$k] = '${1}'.$v;
+            }
             $output = preg_replace($p_arNums, $r_nums, $output);
             
-            foreach ($arNums as $k => $v) $p_arNums[$k] = '/'.$v.'([a-z-\d]+)/ui';
-            foreach ($nums as $k => $v) $r_nums[$k] = $v.'${1}';
+            foreach ($arNums as $k => $v) {
+                $p_arNums[$k] = '/'.$v.'([a-z-\d]+)/ui';
+            }
+            foreach ($nums as $k => $v) {
+                $r_nums[$k] = $v.'${1}';
+            }
             $output = preg_replace($p_arNums, $r_nums, $output);
         }
 
@@ -598,9 +620,9 @@ class I18N_Arabic_Glyphs
      * 
      * @return string                  
      */
-    protected function decodeEntities2($prefix, $codepoint, $original, 
-                                       &$table, &$exclude)
-    {
+    protected function decodeEntities2(
+        $prefix, $codepoint, $original, &$table, &$exclude
+    ) {
         // Named entity
         if (!$prefix) {
             if (isset($table[$original])) {

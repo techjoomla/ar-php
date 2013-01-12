@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2012 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -95,7 +95,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -118,7 +118,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2012 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -330,6 +330,7 @@ class I18N_Arabic_Numbers
         return $string;
     }
     
+    // Need documentation
     public function money2str($number, $iso='SYP', $lang='ar')
     {
         $iso  = strtoupper($iso);
@@ -464,7 +465,10 @@ class I18N_Arabic_Numbers
             }
             
             if ($hundred == 200) {
-                array_push($items, $pre.$this->_individual[$hundred][$this->_format]);
+                array_push(
+                    $items, 
+                    $pre.$this->_individual[$hundred][$this->_format]
+                );
             } else {
                 array_push($items, $pre.$this->_individual[$hundred]);
             }
@@ -489,26 +493,40 @@ class I18N_Arabic_Numbers
                     $ones = $number % 10;
                     $tens = floor($number / 10) * 10;
 
-                    array_push($items, 'ال' . $this->_ordering[$ones][$this->_feminine]);
-                    array_push($items, 'ال' . $this->_individual[$tens][$this->_format]);
+                    array_push(
+                        $items, 
+                        'ال' . $this->_ordering[$ones][$this->_feminine]
+                    );
+                    array_push(
+                        $items, 
+                        'ال' . $this->_individual[$tens][$this->_format]
+                    );
                 }
             } else {
                 if ($number == 2 || $number == 12) {
-                    array_push($items, $this->_individual[$number]
-                                                        [$this->_feminine]
-                                                        [$this->_format]);
+                    array_push(
+                        $items, 
+                        $this->_individual[$number][$this->_feminine][$this->_format]
+                    );
                 } elseif ($number < 20) {
-                    array_push($items, $this->_individual[$number][$this->_feminine]);
+                    array_push(
+                        $items, 
+                        $this->_individual[$number][$this->_feminine]
+                    );
                 } else {
                     $ones = $number % 10;
                     $tens = floor($number / 10) * 10;
                     
                     if ($ones == 2) {
-                        array_push($items, $this->_individual[$ones]
-                                                            [$this->_feminine]
-                                                            [$this->_format]);
+                        array_push(
+                            $items, 
+                            $this->_individual[$ones][$this->_feminine][$this->_format]
+                        );
                     } elseif ($ones > 0) {
-                        array_push($items, $this->_individual[$ones][$this->_feminine]);
+                        array_push(
+                            $items, 
+                            $this->_individual[$ones][$this->_feminine]
+                        );
                     }
                     
                     array_push($items, $this->_individual[$tens][$this->_format]);
@@ -529,8 +547,8 @@ class I18N_Arabic_Numbers
      * @param integer $number The number you want to present in Arabic-Indic digits
      *                        using HTML entities
      *                    
-     * @return string The Arabic-Indic digits represent inserted integer number using 
-     *                HTML entities
+     * @return string The Arabic-Indic digits represent inserted integer number 
+     *                using HTML entities
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function int2indic($number)
