@@ -130,6 +130,7 @@ class I18N_Arabic_Numbers
     private $_arabicIndic   = array();
     private $_ordering      = array();
     private $_currency      = array();
+    private $_spell         = array();
     private $_feminine      = 1;
     private $_format        = 1;
     private $_order         = 1;
@@ -193,6 +194,10 @@ class I18N_Arabic_Numbers
         foreach ($xml->xpath("//order/number[@gender='female']") as $num) {
             $this->_ordering["{$num['value']}"][2] = (string)$num;
         }
+        
+        foreach ($xml->xpath("//individual/number[@value<11 or @value>19]") as $num) {
+            $this->_spell[(string)$num] = (integer)$num['value'];
+        } 
         
         $xml = simplexml_load_file(dirname(__FILE__).'/data/arab_countries.xml');
         
@@ -330,7 +335,14 @@ class I18N_Arabic_Numbers
         return $string;
     }
     
-    // Need documentation
+    /**
+     * Spell integer number in Arabic idiom
+     *      
+     * @param integer $number The number you want to spell in Arabic idiom
+     *                    
+     * @return string The Arabic idiom that spells inserted number
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     public function money2str($number, $iso='SYP', $lang='ar')
     {
         $iso  = strtoupper($iso);
@@ -354,6 +366,89 @@ class I18N_Arabic_Numbers
         }
         
         return $string;
+    }
+    
+    /**
+     * Convert Arabic idiom number string into Integer
+     *      
+     * @param string $str The Arabic idiom that spells input number
+     *                    
+     * @return integer The number you spell it in the Arabic idiom
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function str2int ($str) {
+        // Normalization phase
+        $str = str_replace(array('أ','إ','آ'), 'ا', $str);
+        $str = str_replace('ه', 'ة', $str);
+        $str = preg_replace( '/\s+/', ' ', $str);
+        $str = str_replace(array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ'), '', $str);
+        $str = str_replace('مائة', 'مئة', $str);
+        $str = str_replace(array('احدى','احد'), 'واحد', $str);
+        $str = str_replace(array('اثنا','اثني','اثنتا', 'اثنتي'), 'اثنان', $str);
+        $str = trim($str);
+        
+        if (strpos($str, 'ناقص') === false && strpos($str, 'سالب') === false) {
+            $negative = false;
+        } else {
+            $negative = true;
+        }
+        
+        // Complications process
+        $segment = array();
+        $max     = count($this->_complications);
+        
+        for ($scale=$max; $scale>0; $scale--) {
+            $key = pow(1000, $scale);
+            
+            $format1 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][1]);
+            $format2 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][2]);
+            $format3 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][3]);
+            $format4 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][4]);
+            
+            if (strpos($str, $format1) !== false) {
+                list($temp, $str) = explode($format1, $str);
+                $segment[$key]    = 'اثنان';
+            } elseif (strpos($str, $format2) !== false) {
+                list($temp, $str) = explode($format2, $str);
+                $segment[$key]    = 'اثنان';
+            } elseif (strpos($str, $format3) !== false) {
+                list($segment[$key], $str) = explode($format3, $str);
+            } elseif (strpos($str, $format4) !== false) {
+                list($segment[$key], $str) = explode($format4, $str);
+                if ($segment[$key] == '') {
+                    $segment[$key] = 'واحد';
+                }
+            }
+            
+            if ($segment[$key] != '') {
+                $segment[$key] = trim($segment[$key]);
+            }
+        }
+        
+        $segment[1] = trim($str);
+        
+        // Individual process
+        $total    = 0;
+        $subTotal = 0;
+        
+        foreach ($segment as $scale => $str) {
+            $str = " $str ";
+            foreach ($this->_spell as $word => $value) {
+                if (strpos($str, " $word ") !== false) {
+                    $str = str_replace(" $word ", ' ', $str);
+                    $subTotal += $value;
+                }
+            }
+            
+            $total   += $subTotal * $scale;
+            $subTotal = 0;
+        }
+        
+        if ($negative) {
+            $total = -1 * $total;
+        }
+        
+        return $total;
     }
     
     /**

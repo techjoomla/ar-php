@@ -9,7 +9,8 @@ What's new in ArPHP 3.6.0 (release date: Jan 20, 2013)
   provided price in Arabic idiom by define value, Arabic currency ISO code, and
   language. Thanks to <msme@arabteam2000-forum.com> who developed the first draft.
 
-(*) Add one more method to the "Numbers" sub class to convert Arabic string back into integer.
+* Add "str2int" method to the "Numbers" sub class to convert Arabic string back into integer,
+  (output limits are +/- 2.15e+9 on 32-bit platforms and +/- 9.22e+18 on 64-bit platforms).
 
 * Add one more method to the "Mktime" sub class called "hijriMonthDays" returns how many
   days are there in a given Hijri month, thanks to Mr. Mouayed Al-Mohammadi for the idea.

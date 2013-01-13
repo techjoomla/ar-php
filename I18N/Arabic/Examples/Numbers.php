@@ -234,6 +234,37 @@ END;
 
 highlight_string($code);
 
+?>
+</div><br />
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output 7: تحويل الرقم المكتوب إلى عدد صحيح من جديد</h2>
+<?php
+    $string  = 'مليار و مئتين و خمسة و ستين مليون و ثلاثمئة و ثمانية و خمسين ألف و تسعمئة و تسعة و سبعين';
+
+    $integer = $Arabic->str2int($string);
+    
+    echo "<p dir=ltr align=center>$string<br />$integer</p>";
+?>
+
+</div><br />
+<div class="Paragraph">
+<h2>Example Code 7:</h2>
+<?php
+$code = <<< END
+<?php
+    require '../../Arabic.php';
+    \$Arabic = new I18N_Arabic('Numbers');
+    
+    \$string  = 'مليار و مئتين و خمسة و ستين مليون و ثلاثمئة و ثمانية و خمسين ألف و تسعمئة و تسعة و سبعين';
+
+    \$integer = \$Arabic->str2int(\$string);
+    
+    echo "<p dir=ltr align=center>\$string<br />\$integer</p>";
+END;
+
+highlight_string($code);
+
 $time_end = microtime(true);
 $time = $time_end - $time_start;
 
