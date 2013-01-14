@@ -336,11 +336,13 @@ class I18N_Arabic_Numbers
     }
     
     /**
-     * Spell integer number in Arabic idiom
+     * Spell number in Arabic idiom as money
      *      
-     * @param integer $number The number you want to spell in Arabic idiom
+     * @param integer $number The number you want to spell in Arabic idiom as money
+     * @param string  $iso    The three-letter Arabic country code defined in ISO 3166 standard
+     * @param string  $lang   The two-letter language code in ISO 639-1 standard [ar|en]
      *                    
-     * @return string The Arabic idiom that spells inserted number
+     * @return string The Arabic idiom that spells inserted number as money
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function money2str($number, $iso='SYP', $lang='ar')
@@ -376,11 +378,12 @@ class I18N_Arabic_Numbers
      * @return integer The number you spell it in the Arabic idiom
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function str2int ($str) {
+    public function str2int ($str) 
+    {
         // Normalization phase
         $str = str_replace(array('أ','إ','آ'), 'ا', $str);
         $str = str_replace('ه', 'ة', $str);
-        $str = preg_replace( '/\s+/', ' ', $str);
+        $str = preg_replace('/\s+/', ' ', $str);
         $str = str_replace(array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ'), '', $str);
         $str = str_replace('مائة', 'مئة', $str);
         $str = str_replace(array('احدى','احد'), 'واحد', $str);
