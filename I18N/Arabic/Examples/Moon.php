@@ -13,7 +13,12 @@
 
 header("Content-type: image/jpeg");
 
-$day  = (int) $_GET['day'];
+if (isset($_GET['day'])) {
+    $day  = (int) $_GET['day'];
+} else {
+    $day = 24;
+}
+
 $all  = ImageCreateFromJPEG('../images/moon.jpg');
 $moon = ImageCreateTrueColor(50, 50);
 

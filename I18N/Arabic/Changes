@@ -37,6 +37,8 @@ What's new in ArPHP 3.6.0 (release date: Jan 20, 2013)
   handle it in a standalone method, instead of that users may consult this FAQ page: 
   (http://www.ar-php.org/faq-php-arabic.html#regexp).
 
+* Minor library examples enhancements includes: "Moon" example has day default value now.
+
   
 What's new in ArPHP 3.5.0 (release date: Sep 1, 2012)
 -----------------------------------------------------
