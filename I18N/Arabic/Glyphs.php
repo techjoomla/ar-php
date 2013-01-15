@@ -451,7 +451,7 @@ class I18N_Arabic_Glyphs
         }
 
         // need more work to fix lines starts by English words
-        if ($en_start) {
+        if (isset($en_start)) {
             $last = true;
             $from = 0;
             
