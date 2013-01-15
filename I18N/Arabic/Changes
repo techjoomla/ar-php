@@ -43,6 +43,7 @@ What's new in ArPHP 3.6.0 (release date: Jan 20, 2013)
     - Remove "Glyphs_SVG example" because current browsers don't have Arabic Glyphs problem anymore.
     - Check for MING extension in the "Glyphs_SWF" example.
     - Check for SQLite PDO driver in the "City" example.
+    - Some SQL example implements Celko visitation model features in the "City" example.
 
   
 What's new in ArPHP 3.5.0 (release date: Sep 1, 2012)

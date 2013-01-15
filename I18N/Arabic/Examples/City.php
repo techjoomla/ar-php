@@ -49,6 +49,11 @@ try {
         echo 'Latitude: ' . $result['latitude'];
         echo ', Longitude: ' . $result['longitude'];
     }
+    
+    $left  = $result['left'];
+    $right = $result['right'];
+    $parent_id = $result['parent_id'];
+    echo "Celko Visitation Parameters (Parent ID=$parent_id, Left=$left, Right=$right)";
 
     echo '<br /><br /><select name="city" dir="rtl" onChange="document.frm.submit()">';
     echo '<option>- إختر رجاء -</option>';
@@ -90,6 +95,29 @@ try {
     }
 }
 ?>
+
+<br /><h2>Some SQL example implements Celko visitation model features:</h2> 
+
+    <ul>
+        <li>
+            <b>Finding all the cities nodes in the selected region:</b><br />
+            <?php echo "SELECT * FROM city WHERE right-left=1 AND left>=$left AND right<=$right"; ?>
+            <br />&nbsp;
+        </li>
+        <li>
+            <b>Retrieving a single path (Country\Region\City):</b><br />
+            <?php echo "SELECT id FROM city WHERE left<=$left AND right>=$right ORDER BY left"; ?>
+            <br />&nbsp;
+        </li>
+        <li>
+            <b>Finding the depth of the nodes (1 is Country, 2 is Region, and 3 is City):</b><br />
+            <?php echo "SELECT COUNT(id) FROM city WHERE left<$left AND right>$right"; ?>
+            <br />&nbsp;
+        </li>
+    </ul>
+
+<a href="http://en.wikipedia.org/wiki/Nested_set_model" target=_blank>Reference</a>
+
 </div><br />
 
 <div class="Paragraph">
