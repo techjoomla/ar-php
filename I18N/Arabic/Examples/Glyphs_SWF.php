@@ -11,6 +11,23 @@
  * @link      http://www.ar-php.org
  */
 
+if (!extension_loaded('ming')) {
+?>
+
+<p><b><font color="red">This example needs MING extension which is not loaded in your PHP environment!</font></b></p>
+
+<p>Information for installing this PECL extension may be found in the manual chapter titled 
+<a href="http://php.net/manual/en/install.pecl.php" target=_blank>Installation of PECL extensions</a>. 
+Additional information such as new releases, downloads, source files, maintainer information, and a CHANGELOG, 
+can be located here: <a href="http://pecl.php.net/package/ming" target=_blank>http://pecl.php.net/package/ming</a>.</p>
+
+<p>This extension has been moved to the <a href="http://pecl.php.net/" target=_blank>PECL</a> repository and is 
+no longer bundled with PHP as of PHP 5.3.0</p>
+
+<?php
+    exit;
+}
+
 require '../../Arabic.php';
 $Arabic = new I18N_Arabic('Glyphs');
 

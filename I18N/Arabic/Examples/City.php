@@ -25,7 +25,7 @@
 
 error_reporting(E_STRICT);
 $time_start = microtime(true);
-  
+
 try {
     /*** connect to SQLite database ***/
     $dbh = new PDO('sqlite:../data/cities.db');
@@ -81,7 +81,13 @@ try {
     // Close the databse connection
     $dbh = null; 
 } catch(PDOException $e) {
-    echo $e->getMessage();
+    if (!in_array('sqlite', PDO::getAvailableDrivers())) {
+        echo '<p align="center"><b><font color="red">Could not find SQLite driver in the available PDO drivers!</font></b>
+              For more information on how to install and activate SQLite PDO driver please check this 
+              <a href="http://php.net/manual/en/pdo.installation.php" target=_blank>page</a></p>';
+    } else {
+        echo $e->getMessage();
+    }
 }
 ?>
 </div><br />
