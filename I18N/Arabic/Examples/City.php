@@ -17,7 +17,7 @@
  * @category  I18N
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2011 Khaled Al-Sham'aa
+ * @copyright 2006-2013 Khaled Al-Sham'aa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org
@@ -44,10 +44,11 @@ try {
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_ASSOC);
 
-    echo $result['arabic'] . ' / ' . $result['english'] . '<br />';
+    echo $result['arabic'] . ' / ' . $result['english'] . '<br /><br />';
     if (!empty($result['latitude'])) {
         echo 'Latitude: ' . $result['latitude'];
         echo ', Longitude: ' . $result['longitude'];
+        echo '<br /><br />';
     }
     
     $left  = $result['left'];
