@@ -196,7 +196,8 @@ class I18N_Arabic_Numbers
         }
         
         foreach ($xml->xpath("//individual/number[@value<11 or @value>19]") as $num) {
-            $this->_spell[(string)$num] = (integer)$num['value'];
+            $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num);
+            $this->_spell[$str] = (integer)$num['value'];
         } 
         
         $xml = simplexml_load_file(dirname(__FILE__).'/data/arab_countries.xml');
@@ -429,7 +430,7 @@ class I18N_Arabic_Numbers
         }
         
         $segment[1] = trim($str);
-        
+
         // Individual process
         $total    = 0;
         $subTotal = 0;
@@ -437,12 +438,12 @@ class I18N_Arabic_Numbers
         foreach ($segment as $scale => $str) {
             $str = " $str ";
             foreach ($this->_spell as $word => $value) {
-                if (strpos($str, " $word ") !== false) {
-                    $str = str_replace(" $word ", ' ', $str);
+                if (strpos($str, "$word ") !== false) {
+                    $str = str_replace("$word ", ' ', $str);
                     $subTotal += $value;
                 }
             }
-            
+
             $total   += $subTotal * $scale;
             $subTotal = 0;
         }

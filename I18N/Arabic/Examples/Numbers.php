@@ -143,10 +143,10 @@ highlight_string($code);
 <?php
     $Arabic->setFeminine(1);
 
-    $integer = '24.7';
-    $text    = $Arabic->money2str($integer, 'KWD', 'ar');
+    $number = 24.7;
+    $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
-    echo "<p dir=ltr align=center>$integer<br />$text</p>";
+    echo "<p dir=ltr align=center>$number<br />$text</p>";
 ?>
 
 </div><br />
@@ -158,10 +158,10 @@ $code = <<< END
     require '../../Arabic.php';
     \$Arabic = new I18N_Arabic('Numbers');
     
-    \$integer = '24.7';
-    \$text    = \$Arabic->money2str($integer, 'KWD', 'ar');
+    \$number = 24.7;
+    \$text   = \$Arabic->money2str(\$number, 'KWD', 'ar');
     
-    echo "<p dir=ltr align=center>\$integer<br />\$text</p>";
+    echo "<p dir=ltr align=center>\$number<br />\$text</p>";
 END;
 
 highlight_string($code);
@@ -172,10 +172,10 @@ highlight_string($code);
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output 5: الأرقام الهندية</h2>
 <?php
-    $integer = '1975/8/2 9:43 صباحا';
-    $text    = $Arabic->int2indic($integer);
+    $text1 = '1975/8/2 9:43 صباحا';
+    $text2 = $Arabic->int2indic($text1);
     
-    echo "<p dir=ltr align=center>$integer<br />$text</p>";
+    echo "<p dir=ltr align=center>$text1<br />$text2</p>";
 ?>
 
 </div><br />
@@ -187,10 +187,10 @@ $code = <<< END
     require '../../Arabic.php';
     \$Arabic = new I18N_Arabic('Numbers');
     
-    \$integer = '1975/8/2 9:43 صباحا';
-    \$text    = \$Arabic->int2indic(\$integer);
+    \$text1 = '1975/8/2 9:43 صباحا';
+    \$text2 = \$Arabic->int2indic(\$text1);
     
-    echo "<p dir=ltr align=center>\$integer<br />\$text</p>";
+    echo "<p dir=ltr align=center>\$text1<br />\$text2</p>";
 END;
 
 highlight_string($code);
