@@ -402,27 +402,13 @@ class I18N_Arabic
      */
     public function coreConvert($str, $inputCharset, $outputCharset)
     {
-        if ($inputCharset != $outputCharset) {
-            if ($inputCharset == 'windows-1256') {
-                $inputCharset = 'cp1256';
-            }
-            
-            if ($outputCharset == 'windows-1256') {
-                $outputCharset = 'cp1256';
-            }
-            
-            $convStr = iconv($inputCharset, "$outputCharset", $str);
-
-            if ($convStr == '' && $str != '') {
-                include self::getClassFile('CharsetC');
-
-                $c = I18N_Arabic_CharsetC::singleton();
-                
-                if ($inputCharset == 'cp1256') {
-                    $convStr = $c->win2utf($str);
-                } else {
-                    $convStr = $c->utf2win($str);
-                }
+        if ($inputCharset != $outputCharset && $str != '') {
+            include self::getClassFile('CharsetC');
+            $c = I18N_Arabic_CharsetC::singleton();
+            if ($inputCharset == 'windows-1256' || $inputCharset == 'cp1256') {
+                $convStr = $c->win2utf($str);
+            } else {
+                $convStr = $c->utf2win($str);
             }
         } else {
             $convStr = $str;

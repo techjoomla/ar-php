@@ -131,7 +131,7 @@ class I18N_Arabic_CharsetD
         
         $total = $charset['windows-1256'] + 
                  $charset['iso-8859-6'] + 
-                 $charset['utf-8'];
+                 $charset['utf-8'] + 1;
         
         $charset['windows-1256'] = round($charset['windows-1256'] * 100 / $total);
         $charset['iso-8859-6']   = round($charset['iso-8859-6'] * 100 / $total);

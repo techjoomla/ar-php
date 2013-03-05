@@ -58,28 +58,16 @@ $this->utf8[44] = 'آ';
 $this->utf8[45] = ',';
 $this->utf8[46] = '.';
 $this->utf8[47] = '؟';
-/*
- $this->utf8[48] = '� ';
- $this->utf8[49] = '١';
- $this->utf8[50] = '٢';
- $this->utf8[51] = '٣';
- $this->utf8[52] = '٤';
- $this->utf8[53] = '٥';
- $this->utf8[54] = '٦';
- $this->utf8[55] = '٧';
- $this->utf8[56] = '٨';
- $this->utf8[57] = '٩';
- */
-$this->utf8[48] = '0';
-$this->utf8[49] = '1';
-$this->utf8[50] = '2';
-$this->utf8[51] = '3';
-$this->utf8[52] = '4';
-$this->utf8[53] = '5';
-$this->utf8[54] = '6';
-$this->utf8[55] = '7';
-$this->utf8[56] = '8';
-$this->utf8[57] = '9';
+$this->utf8[48] = '٠';
+$this->utf8[49] = '١';
+$this->utf8[50] = '٢';
+$this->utf8[51] = '٣';
+$this->utf8[52] = '٤';
+$this->utf8[53] = '٥';
+$this->utf8[54] = '٦';
+$this->utf8[55] = '٧';
+$this->utf8[56] = '٨';
+$this->utf8[57] = '٩';
 
 $this->utf8[58] = 'ُ';
 ?>

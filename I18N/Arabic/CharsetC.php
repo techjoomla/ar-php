@@ -92,10 +92,11 @@
  */ 
 class I18N_Arabic_CharsetC
 {
-    private $_utfStr  = '';
-    private $_winStr  = '';
-    private $_isoStr  = '';
-    private $_htmlStr = '';
+    public $windows1256   = array();
+    public $iso88596      = array();
+    public $utf8          = array();
+    public $bug           = array();
+    public $html          = array();
 
     // Hold an instance of the class
     private static $_instance;
@@ -107,16 +108,7 @@ class I18N_Arabic_CharsetC
      */         
     public function __construct($sets = array('windows-1256', 'utf-8'))
     {
-        $handle = fopen(dirname(__FILE__).'/data/charset/charset.src', 'r');
-        if ($handle) {
-            $this->_utfStr  = fgets($handle, 4096);
-            $this->_winStr  = fgets($handle, 4096);
-            $this->_isoStr  = fgets($handle, 4096);
-            $this->_htmlStr = fgets($handle, 4096);
-            fclose($handle);
-        }
-
-        if (in_array('windows-1256', $sets)) {
+        if (in_array('windows-1256', $sets) || in_array('cp1256', $sets)) {
             include dirname(__FILE__).'/data/charset/_windows1256.php';
         }
         
@@ -124,7 +116,7 @@ class I18N_Arabic_CharsetC
             include dirname(__FILE__).'/data/charset/_iso88596.php';
         }
         
-        if (in_array('utf-8', $sets)) {
+        if (in_array('utf-8', $sets) || in_array('utf8', $sets)) {
             include dirname(__FILE__).'/data/charset/_utf8.php';
         }
         
@@ -167,106 +159,6 @@ class I18N_Arabic_CharsetC
     }
 
     /**
-     * Get HTML entity from given position
-     *      
-     * @param integer $index Extract position
-     *      
-     * @return string HTML entity
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function getHTML($index)
-    {
-        return trim(substr($this->_htmlStr, $index*4, 4));
-    }
-    
-    /**
-     * Get UTF character from given position
-     *      
-     * @param integer $index Extract position
-     *      
-     * @return string UTF character
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function getUTF($index)
-    {
-        return trim(substr($this->_utfStr, $index*2, 2));
-    }
-    
-    /**
-     * Get extract position of a given UTF character
-     *      
-     * @param string $char UTF character
-     *      
-     * @return integer Extract position
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function findUTF($char)
-    {
-        if (!$char) {
-            return false;
-        }
-        return strpos($this->_utfStr, $char)/2;
-    }
-    
-    /**
-     * Get Windows-1256 character from given position
-     *      
-     * @param integer $index Extract position
-     *      
-     * @return string Windows-1256 character
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function getWIN($index)
-    {
-        return substr($this->_winStr, $index, 1);
-    }
-    
-    /**
-     * Get extract position of a given Windows-1256 character
-     *      
-     * @param string $char Windows-1256 character
-     *      
-     * @return integer Extract position
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function findWIN($char)
-    {
-        if (!$char) {
-            return false;
-        }
-        return strpos($this->_winStr, $char);
-    }
-    
-    /**
-     * Get ISO-8859-6 character from given position
-     *      
-     * @param integer $index Extract position
-     *      
-     * @return string ISO-8859-6 character
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function getISO($index)
-    {
-        return substr($this->_isoStr, $index, 1);
-    }
-    
-    /**
-     * Get extract position of a given ISO-8859-6 character
-     *      
-     * @param string $char ISO-8859-6 character
-     *      
-     * @return integer Extract position
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    protected function findISO($char)
-    {
-        if (!$char) {
-            return false;
-        }
-        return strpos($this->_isoStr, $char);
-    }
-    
-    /**
      * Convert Arabic string from Windows-1256 to ISO-8859-6 format
      *      
      * @param string $string Original Arabic string in Windows-1256 format
@@ -276,17 +168,7 @@ class I18N_Arabic_CharsetC
      */
     public function win2iso($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findWIN($char);
-            if (is_int($key)) {
-                $converted .= $this->getISO($key);
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->windows1256, $this->iso88596, $string);
         return $converted;
     }
     
@@ -300,18 +182,7 @@ class I18N_Arabic_CharsetC
      */
     public function win2utf($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findWIN($char);
-
-            if (is_int($key)) {
-                $converted .= $this->getUTF($key);
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->windows1256, $this->utf8, $string);
         return $converted;
     }
 
@@ -325,18 +196,7 @@ class I18N_Arabic_CharsetC
      */
     public function win2html($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findWIN($char);
-
-            if (is_int($key) && $key < 58) {
-                $converted .= '&#' . $this->getHTML($key) . ';';
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = preg_replace($this->windows1256, $this->html, $string);
         return $converted;
     }
 
@@ -350,18 +210,7 @@ class I18N_Arabic_CharsetC
      */
     public function iso2html($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findISO($char);
-
-            if (is_int($key) && $key < 58) {
-                $converted .= '&#' . $this->getHTML($key) . ';';
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = preg_replace($this->iso88596, $this->html, $string);
         return $converted;
     }
 
@@ -375,28 +224,7 @@ class I18N_Arabic_CharsetC
      */
     public function utf2html($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 216 || $ascii == 217) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = $this->findUTF($code);
-                if (is_int($key) && $key < 58) {
-                    $converted .= '&#' . $this->getHTML($key) . ';';
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = preg_replace($this->utf8, $this->html, $string);
         return $converted;
     }
     
@@ -410,17 +238,7 @@ class I18N_Arabic_CharsetC
      */
     public function iso2win($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findISO($char);
-            if (is_int($key)) {
-                $converted .= $this->getWIN($key);
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->iso88596, $this->windows1256, $string);
         return $converted;
     }
     
@@ -434,17 +252,7 @@ class I18N_Arabic_CharsetC
      */
     public function iso2utf($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        foreach ($chars as $char) {
-            $key = $this->findISO($char);
-            if (is_int($key)) {
-                $converted .= $this->getUTF($key);
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->iso88596, $this->utf8, $string);
         return $converted;
     }
     
@@ -458,28 +266,7 @@ class I18N_Arabic_CharsetC
      */
     public function utf2win($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 216 || $ascii == 217) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = $this->findUTF($code);
-                if (is_int($key)) {
-                    $converted .= $this->getWIN($key);
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->utf8, $this->windows1256, $string);
         return $converted;
     }
     
@@ -493,28 +280,7 @@ class I18N_Arabic_CharsetC
      */
     public function utf2iso($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 216 || $ascii == 217) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = $this->findUTF($code);
-                if (is_int($key)) {
-                    $converted .= $this->getISO($key);
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->utf8, $this->iso88596, $string);
         return $converted;
     }
     
@@ -532,28 +298,7 @@ class I18N_Arabic_CharsetC
      */
     public function bug2win($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 195 || $ascii == 194) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = array_search($code, $this->bug);
-                if (is_int($key)) {
-                    $converted .= $this->getWIN($key);
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->bug, $this->windows1256, $string);
         return $converted;
     }
     
@@ -571,28 +316,7 @@ class I18N_Arabic_CharsetC
      */
     public function bug2utf($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 195 || $ascii == 194) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = array_search($code, $this->bug);
-                if (is_int($key)) {
-                    $converted .= $this->getUTF($key);
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->bug, $this->utf8, $string);
         return $converted;
     }
     
@@ -610,28 +334,7 @@ class I18N_Arabic_CharsetC
      */
     public function bug2iso($string)
     {
-        $chars     = preg_split('//', $string);
-        $converted = null;
-        
-        $cmp = false;
-        foreach ($chars as $char) {
-            $ascii = ord($char);
-            if (($ascii == 195 || $ascii == 194) && !$cmp) {
-                $code = $char;
-                $cmp  = true;
-                continue;
-            }
-            if ($cmp) {
-                $code .= $char;
-                $cmp   = false;
-                $key   = array_search($code, $this->bug);
-                if (is_int($key)) {
-                    $converted .= $this->getISO($key);
-                }
-            } else {
-                $converted .= $char;
-            }
-        }
+        $converted = str_replace($this->bug, $this->iso88596, $string);
         return $converted;
     }
     
