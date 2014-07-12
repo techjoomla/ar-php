@@ -546,4 +546,3 @@ class I18N_Arabic_Date
         return $diff;
     }
 }
-

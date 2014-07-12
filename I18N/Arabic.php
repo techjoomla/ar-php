@@ -268,7 +268,6 @@ class I18N_Arabic
         if ($this->_compatibleMode 
             && array_key_exists($methodName, $this->_compatible)
         ) {
-            
             $methodName = $this->_compatible[$methodName];
         }
 
@@ -286,23 +285,25 @@ class I18N_Arabic
                 $value = $parameter->getDefaultValue();
             }
             
-            $params[$name] = $this->coreConvert(
-                $value, 
-                $this->getInputCharset(), 
-                'utf-8'
-            );
+            if ($methodName == 'decompress'
+                || ($methodName == 'search' && $name == 'bin')
+                || ($methodName == 'length' && $name == 'bin')
+            ) {
+                $params[$name] = $value;
+            } else {
+                $params[$name] = iconv($this->getInputCharset(), 'utf-8', $value);
+            }
         }
 
         $value = call_user_func_array(array(&$this->myObject, $methodName), $params);
 
         if ($methodName == 'tagText') {
             foreach ($value as $key=>$text) {
-                $value[$key][0] = $this->coreConvert(
-                    $text[0], 'utf-8', $this->getOutputCharset()
-                );
+                $value[$key][0] = iconv('utf-8', $this->getOutputCharset(), $text[0]);
             }
+        } elseif ($methodName == 'compress') {
         } else {
-            $value = $this->coreConvert($value, 'utf-8', $this->getOutputCharset());
+            $value = iconv('utf-8', $this->getOutputCharset(), $value);
         }
 
         return $value;
@@ -335,7 +336,10 @@ class I18N_Arabic
         
         $charset = strtolower($charset);
         
-        if (in_array($charset, array('utf-8', 'windows-1256', 'iso-8859-6'))) {
+        if (in_array($charset, array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6'))) {
+            if ($charset == 'windows-1256') {
+                $charset = 'cp1256';
+            }
             $this->_inputCharset = $charset;
         } else {
             $flag = false;
@@ -358,7 +362,10 @@ class I18N_Arabic
         
         $charset = strtolower($charset);
         
-        if (in_array($charset, array('utf-8', 'windows-1256', 'iso-8859-6'))) {
+        if (in_array($charset, array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6'))) {
+            if ($charset == 'windows-1256') {
+                $charset = 'cp1256';
+            }
             $this->_outputCharset = $charset;
         } else {
             $flag = false;
@@ -375,7 +382,13 @@ class I18N_Arabic
      */
     public function getInputCharset()
     {
-        return $this->_inputCharset;
+        if ($this->_inputCharset == 'cp1256') {
+            $charset = 'windows-1256';
+        } else {
+            $charset = $this->_inputCharset;
+        }
+        
+        return $charset;
     }
     
     /**
@@ -386,65 +399,13 @@ class I18N_Arabic
      */
     public function getOutputCharset()
     {
-        return $this->_outputCharset;
-    }
-    
-    /**
-     * Convert Arabic string from one charset to another
-     *          
-     * @param string $str           Original Arabic string that you would like
-     *                              to convert
-     * @param string $inputCharset  Input charset
-     * @param string $outputCharset Output charset
-     *      
-     * @return string Converted Arabic string in defined charset
-     * @author Khaled Al-Shamaa <khaled@ar-php.org>
-     */
-    public function coreConvert($str, $inputCharset, $outputCharset)
-    {
-        if ($inputCharset != $outputCharset && $str != '') {
-            include self::getClassFile('CharsetC');
-            $c = I18N_Arabic_CharsetC::singleton();
-            if ($inputCharset == 'windows-1256' || $inputCharset == 'cp1256') {
-                $convStr = $c->win2utf($str);
-            } else {
-                $convStr = $c->utf2win($str);
-            }
+        if ($this->_outputCharset == 'cp1256') {
+            $charset = 'windows-1256';
         } else {
-            $convStr = $str;
+            $charset = $this->_outputCharset;
         }
         
-        return $convStr;
-    }
-
-    /**
-     * Convert Arabic string from one format to another
-     *          
-     * @param string $str           Arabic string in the format set by setInput
-     *                              Charset
-     * @param string $inputCharset  (optional) Input charset 
-     *                              [utf-8|windows-1256|iso-8859-6]
-     *                              default value is NULL (use set input charset)
-     * @param string $outputCharset (optional) Output charset 
-     *                              [utf-8|windows-1256|iso-8859-6]
-     *                              default value is NULL (use set output charset)
-     *                                  
-     * @return string Arabic string in the format set by method setOutputCharset
-     * @author Khaled Al-Shamaa <khaled@ar-php.org>
-     */
-    public function convert($str, $inputCharset = null, $outputCharset = null)
-    {
-        if ($inputCharset == null) {
-            $inputCharset = $this->_inputCharset;
-        }
-        
-        if ($outputCharset == null) {
-            $outputCharset = $this->_outputCharset;
-        }
-        
-        $str = $this->coreConvert($str, $inputCharset, $outputCharset);
-
-        return $str;
+        return $charset;
     }
 
     /**

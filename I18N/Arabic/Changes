@@ -1,3 +1,32 @@
+What's new in ArPHP 4.0 (release date: Aug ##, 2014)
+-----------------------------------------------------
+
+(*) Convert from and to Arabizi!
+
+(*) Add "getLanguage" method to the "CharsetD" sub class.
+
+(*) Improve "isForum" method by support detecting more forum applications.
+
+(*) Use "SVN: <svn_id>" in the version documentation tag.
+
+(*) Rewrite "KeySwap" sub class to move data out of the code and support French keyboard.
+
+(*) Add "Sort" sub class.
+
+* Deprecate "CharsetC" sub class and use "iconv" function to convert charset encoding internally.
+
+* Check and fix warnings of the PEAR coding standard.
+
+* Fix the compatibility issues with PHP 5.3, 5.4, and 5.5 reported by PHP_CodeSniffer using 
+  PHPCompatibility standards.
+
+* Fix the "money2str" method in the "Numbers" sub class to omit print money units when basic 
+  or fraction value is zero. Thanks to Abdulmajeed Alharbi <abosami2000@gmail.com>.
+
+* Fix "CompressStr" sub class bug related to implement charset encoding conversion on binary 
+  input/output arguments in the "compress", "decompress", "search", and "length" methods. 
+
+
 What's new in ArPHP 3.6.0 (release date: Jan 20, 2013)
 -----------------------------------------------------
 

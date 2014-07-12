@@ -193,7 +193,8 @@ class I18N_Arabic_Stemmer
         $max   = mb_strlen($word, 'UTF-8');
         
         for ($i=0; $i < $max; $i++) {
-            if (mb_strpos($notChars, mb_substr($word, $i, 1, 'UTF-8'), 0, 'UTF-8') === false) {
+            $needle = mb_substr($word, $i, 1, 'UTF-8');
+            if (mb_strpos($notChars, $needle, 0, 'UTF-8') === false) {
                 if ($right == -1) {
                     $right = $i;
                 }
@@ -210,14 +211,16 @@ class I18N_Arabic_Stemmer
         }
         
         for ($i=0; $i < $right; $i++) {
-            if (mb_strpos($preChars, mb_substr($word, $i, 1, 'UTF-8'), 0, 'UTF-8') === false) {
+            $needle = mb_substr($word, $i, 1, 'UTF-8');
+            if (mb_strpos($preChars, $needle, 0, 'UTF-8') === false) {
                 $right = $i;
                 break;
             }
         }
         
         for ($i=$max-1; $i>$left; $i--) {
-            if (mb_strpos($postChars, mb_substr($word, $i, 1, 'UTF-8'), 0, 'UTF-8') === false) {
+            $needle = mb_substr($word, $i, 1, 'UTF-8');
+            if (mb_strpos($postChars, $needle, 0, 'UTF-8') === false) {
                 $left = $i;
                 break;
             }

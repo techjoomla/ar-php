@@ -106,9 +106,10 @@ class I18N_Arabic_Glyphs
      */         
     public function __construct()
     {
-        $this->_prevLink = '،؟؛ـئبتثجحخسشصضطظعغفقكلمنهي';
-        $this->_nextLink = 'ـآأؤإائبةتثجحخدذرزسشصضطظعغفقكلمنهوىي';
-        $this->_vowel    = 'ًٌٍَُِّْ';
+        $this->_prevLink  = '،؟؛ـئبتثجحخسشصضطظعغفقكلمنهي';
+        $this->_nextLink  = 'ـآأؤإائبةتثجحخدذرز';
+        $this->_nextLink .= 'سشصضطظعغفقكلمنهوىي';
+        $this->_vowel     = 'ًٌٍَُِّْ';
 
         /*
          $this->_glyphs['ً']  = array('FE70','FE71');

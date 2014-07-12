@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ï»؟<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 <title>Arabic Text Compressor</title>
-<meta http-equiv="Content-Type" content="text/html;charset=windows-1256" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 </head>
 
@@ -49,11 +49,11 @@ echo "Compressed string size after is: $after Byte<br>";
 echo "Rate $rate %<hr>";
 
 $Arabic->setInputCharset('utf-8');
-$Arabic->setOutputCharset('windows-1256');
+$Arabic->setOutputCharset('utf-8');
 
 $str = $Arabic->decompress($zip);
 
-$word = 'الدول';
+$word = 'ط§ظ„ط¯ظˆظ„';
 
 if ($Arabic->search($zip, $word)) {
     echo "Search for $word in zipped string and find it<hr>";
@@ -61,7 +61,7 @@ if ($Arabic->search($zip, $word)) {
     echo "Search for $word in zipped string and do not find it<hr>";
 }
 
-$len = I18N_Arabic_CompressStr::length($zip);
+$len = $Arabic->length($zip);
 echo "Original length of zipped string is $len Byte<hr>";
 
 echo '<div dir="rtl" align="justify">'.nl2br($str).'</div>';
@@ -93,11 +93,11 @@ $code = <<< END
     echo "Rate \$rate %<hr>";
 
     \$Arabic->setInputCharset('utf-8');
-    \$Arabic->setOutputCharset('windows-1256');
+    \$Arabic->setOutputCharset('utf-8');
 
     \$str = \$Arabic->decompress(\$zip);
 
-    \$word = 'الدول';
+    \$word = 'ط§ظ„ط¯ظˆظ„';
     if ($Arabic->search(\$zip, \$word)) {
         echo "Search for \$word in zipped string and find it<hr>";
     } else {

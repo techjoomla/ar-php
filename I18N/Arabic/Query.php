@@ -326,7 +326,7 @@ class I18N_Arabic_Query
     public function getWhereCondition($arg)
     {
         $sql = '';
-        $arg = mysql_escape_string($arg);
+        $arg = mysql_real_escape_string($arg);
         
         // Check if there are phrases in $arg should handle as it is
         $phrase = explode("\"", $arg);

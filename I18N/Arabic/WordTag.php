@@ -128,12 +128,14 @@
  */ 
 class I18N_Arabic_WordTag
 {
-    private static $_particlePreNouns    = array('عن', 'في', 'مذ', 'منذ', 'من', 
-                                                  'الى', 'على', 'حتى', 'الا', 
-                                                  'غير', 'سوى', 'خلا', 'عدا', 
-                                                  'حاشا', 'ليس');
+    private static $_particlePreNouns = array('عن', 'في', 'مذ', 'منذ',
+                                              'من', 'الى', 'على', 'حتى',
+                                              'الا', 'غير', 'سوى', 'خلا',
+                                              'عدا', 'حاشا', 'ليس');
+
     private static $_normalizeAlef       = array('أ','إ','آ');
-    private static $_normalizeDiacritics = array('َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ');
+    private static $_normalizeDiacritics = array('َ','ً','ُ','ٌ',
+                                                 'ِ','ٍ','ْ','ّ');
 
     /**
      * Loads initialize values
@@ -222,8 +224,9 @@ class I18N_Arabic_WordTag
         
         // started by YEH, before some letters is a verb and not a noun
         // YEH,THAL,JEEM,HAH,KHAH,ZAIN,SHEEN,SAD,DAD,TAH,ZAH,GHAIN,KAF
+        $haystack = 'يذجهخزشصضطظغك';
         if (mb_substr($word, 0, 1) == 'ي' 
-            && (mb_strpos('يذجهخزشصضطظغك', mb_substr($word, 1, 1)) !== false) 
+            && (mb_strpos($haystack, mb_substr($word, 1, 1)) !== false) 
             && $wordLen > 3
         ) {
             return false;

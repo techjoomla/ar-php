@@ -195,7 +195,8 @@ class I18N_Arabic_Numbers
             $this->_ordering["{$num['value']}"][2] = (string)$num;
         }
         
-        foreach ($xml->xpath("//individual/number[@value<11 or @value>19]") as $num) {
+        $expression = "//individual/number[@value<11 or @value>19]";
+        foreach ($xml->xpath($expression) as $num) {
             $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num);
             $this->_spell[$str] = (integer)$num['value'];
         } 
@@ -203,11 +204,15 @@ class I18N_Arabic_Numbers
         $xml = simplexml_load_file(dirname(__FILE__).'/data/arab_countries.xml');
         
         foreach ($xml->xpath("//currency") as $info) {
-            $this->_currency["{$info->iso}"]['ar']['basic']    = $info->money->arabic->basic;
-            $this->_currency["{$info->iso}"]['ar']['fraction'] = $info->money->arabic->fraction;
-            $this->_currency["{$info->iso}"]['en']['basic']    = $info->money->english->basic;
-            $this->_currency["{$info->iso}"]['en']['fraction'] = $info->money->english->fraction;
-            $this->_currency["{$info->iso}"]['decimals']       = $info->money->decimals;
+            $money_ar = $info->money->arabic;
+            $money_en = $info->money->english;
+            
+            $this->_currency["{$info->iso}"]['ar']['basic']    = $money_ar->basic;
+            $this->_currency["{$info->iso}"]['ar']['fraction'] = $money_ar->fraction;
+            $this->_currency["{$info->iso}"]['en']['basic']    = $money_en->basic;
+            $this->_currency["{$info->iso}"]['en']['fraction'] = $money_en->fraction;
+
+            $this->_currency["{$info->iso}"]['decimals'] = $info->money->decimals;
         }
     }
     
@@ -340,8 +345,10 @@ class I18N_Arabic_Numbers
      * Spell number in Arabic idiom as money
      *      
      * @param integer $number The number you want to spell in Arabic idiom as money
-     * @param string  $iso    The three-letter Arabic country code defined in ISO 3166 standard
-     * @param string  $lang   The two-letter language code in ISO 639-1 standard [ar|en]
+     * @param string  $iso    The three-letter Arabic country code defined in 
+     *                        ISO 3166 standard
+     * @param string  $lang   The two-letter language code in ISO 639-1 standard
+     *                        [ar|en]
      *                    
      * @return string The Arabic idiom that spells inserted number as money
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -353,15 +360,20 @@ class I18N_Arabic_Numbers
         
         $number = sprintf("%01.{$this->_currency[$iso]['decimals']}f", $number);
         $temp   = explode('.', $number);
+        $string = '';
 
-        $string  = $this->subInt2str($temp[0]);
-        $string .= ' ' . $this->_currency[$iso][$lang]['basic'];
+        if ($temp[0] != 0) {
+            $string .= $this->subInt2str($temp[0]);
+            $string .= ' ' . $this->_currency[$iso][$lang]['basic'];
+        }
 
-        if (!empty($temp[1])) {
-            if ($lang == 'ar') {
-                $string .= ' و ';
-            } else {
-                $string .= ' and ';
+        if (!empty($temp[1]) && $temp[1] != 0) {
+            if ($string != '') {
+                if ($lang == 'ar') {
+                    $string .= ' و ';
+                } else {
+                    $string .= ' and ';
+                }
             }
             
             $string .= $this->subInt2str((int)$temp[1]); 
@@ -385,13 +397,17 @@ class I18N_Arabic_Numbers
         $str = str_replace(array('أ','إ','آ'), 'ا', $str);
         $str = str_replace('ه', 'ة', $str);
         $str = preg_replace('/\s+/', ' ', $str);
-        $str = str_replace(array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ'), '', $str);
+        $ptr = array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ');
+        $str = str_replace($ptr, '', $str);
         $str = str_replace('مائة', 'مئة', $str);
         $str = str_replace(array('احدى','احد'), 'واحد', $str);
-        $str = str_replace(array('اثنا','اثني','اثنتا', 'اثنتي'), 'اثنان', $str);
+        $ptr = array('اثنا','اثني','اثنتا', 'اثنتي');
+        $str = str_replace($ptr, 'اثنان', $str);
         $str = trim($str);
         
-        if (strpos($str, 'ناقص') === false && strpos($str, 'سالب') === false) {
+        if (strpos($str, 'ناقص') === false
+            && strpos($str, 'سالب') === false
+        ) {
             $negative = false;
         } else {
             $negative = true;
@@ -404,10 +420,11 @@ class I18N_Arabic_Numbers
         for ($scale=$max; $scale>0; $scale--) {
             $key = pow(1000, $scale);
             
-            $format1 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][1]);
-            $format2 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][2]);
-            $format3 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][3]);
-            $format4 = str_replace(array('أ','إ','آ'), 'ا', $this->_complications[$scale][4]);
+            $pattern = array('أ','إ','آ');
+            $format1 = str_replace($pattern, 'ا', $this->_complications[$scale][1]);
+            $format2 = str_replace($pattern, 'ا', $this->_complications[$scale][2]);
+            $format3 = str_replace($pattern, 'ا', $this->_complications[$scale][3]);
+            $format4 = str_replace($pattern, 'ا', $this->_complications[$scale][4]);
             
             if (strpos($str, $format1) !== false) {
                 list($temp, $str) = explode($format1, $str);
@@ -619,7 +636,7 @@ class I18N_Arabic_Numbers
                     if ($ones == 2) {
                         array_push(
                             $items, 
-                            $this->_individual[$ones][$this->_feminine][$this->_format]
+                            $this->_individual[2][$this->_feminine][$this->_format]
                         );
                     } elseif ($ones > 0) {
                         array_push(

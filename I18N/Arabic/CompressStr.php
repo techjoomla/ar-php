@@ -244,6 +244,7 @@ class I18N_Arabic_CompressStr
      */
     public static function search($bin, $word) 
     {
+        $word  = iconv('utf-8', 'cp1256', $word);
         $wBits = self::str2bits($word);
 
         $temp  = unpack('h*', $bin);
@@ -258,11 +259,11 @@ class I18N_Arabic_CompressStr
     }
 
     /**
-     * Retrieve the origenal string length
+     * Retrieve the original string length
      *      
      * @param binary $bin Compressed binary string
      *      
-     * @return integer Origenal string length
+     * @return integer Original string length
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public static function length($bin) 

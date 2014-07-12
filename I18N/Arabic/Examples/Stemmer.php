@@ -39,7 +39,7 @@ $examples[] = 'ليس هذا بالحل المثالي انظر  كتبي وكت
 foreach ($examples as $str) {
     echo $str . ' <br />(';
     
-    $words = split(' ', $str);
+    $words = preg_split('/\s+/', $str);
     $stems = array();
 
     foreach ($words as $word) {
