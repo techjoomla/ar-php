@@ -188,13 +188,17 @@ class I18N_Arabic_Transliteration
      * orthography of the Arabic language
      *         
      * @param string $string English string you want to transliterate
+     * @param string $locale Locale information (e.g. 'en_GB' or 'de_DE')
      *                    
      * @return String Out of vocabulary English string in Arabic characters
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public static function en2ar($string)
+    public static function en2ar($string, $locale='en_GB')
     {
-        $string = strtolower($string);
+        setlocale(LC_ALL, $locale);
+		$string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+		
+		$string = strtolower($string);
         $words  = explode(' ', $string);
         $string = '';
         

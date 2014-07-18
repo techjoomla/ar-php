@@ -95,9 +95,6 @@
  */ 
 class I18N_Arabic_CharsetD
 {
-    private $_arLogodd;
-    private $_enLogodd;
-
     /**
      * Loads initialize values
      *
@@ -105,8 +102,6 @@ class I18N_Arabic_CharsetD
      */         
     public function __construct()
     {
-        $this->_arLogodd = file(dirname(__FILE__).'/data/ar-logodd.php');
-        $this->_enLogodd = file(dirname(__FILE__).'/data/en-logodd.php');
     }
 
     /**
@@ -166,144 +161,5 @@ class I18N_Arabic_CharsetD
         }
 
         return $value;
-    }
-
-
-    protected function checkEn($str) {
-        $lines  = $this->_enLogodd;
-        $logodd = array();
-        
-        $line   = array_shift($lines);
-        $line   = rtrim($line);
-        $second = preg_split("/\t/", $line);
-        $temp   = array_shift($second);
-        
-        foreach ($lines as $line) {
-            $line   = rtrim($line);
-            $values = preg_split("/\t/", $line);
-            $first  = array_shift($values);
-            
-            for ($i=0; $i<28; $i++) {
-                $logodd["$first"]["{$second[$i]}"] = $values[$i];
-            }
-        }
-        
-        $str  = mb_strtolower($str);
-        $max  = mb_strlen($str, 'UTF-8');
-        $rank = 0;
-        
-        for ($i=1; $i<$max; $i++) {
-            $first  = mb_substr($str, $i-1, 1, 'UTF-8');
-            $second = mb_substr($str, $i, 1, 'UTF-8');
-     
-            if (isset($logodd["$first"]["$second"])) {
-                $rank += $logodd["$first"]["$second"]; 
-            } else {
-                $rank -= 10;
-            }
-        }
-        
-        return $rank;
-    }
-
-    protected function checkAr($str) {
-        $lines  = $this->_arLogodd;
-        $logodd = array();
-        
-        $line   = array_shift($lines);
-        $line   = rtrim($line);
-        $second = preg_split("/\t/", $line);
-        $temp   = array_shift($second);
-        
-        foreach ($lines as $line) {
-            $line   = rtrim($line);
-            $values = preg_split("/\t/", $line);
-            $first  = array_shift($values);
-            
-            for ($i=0; $i<37; $i++) {
-                $logodd["$first"]["{$second[$i]}"] = $values[$i];
-            }
-        }
-        
-        $max  = mb_strlen($str, 'UTF-8');
-        $rank = 0;
-        
-        for ($i=1; $i<$max; $i++) {
-            $first  = mb_substr($str, $i-1, 1, 'UTF-8');
-            $second = mb_substr($str, $i, 1, 'UTF-8');
-     
-            if (isset($logodd["$first"]["$second"])) {
-                $rank += $logodd["$first"]["$second"]; 
-            } else {
-                $rank -= 10;
-            }
-        }
-
-        return $rank;
-    }
-    
-    public function getLanguage($str) {
-		include dirname(__FILE__).'/KeySwap.php';
-		$obj = new I18N_Arabic_KeySwap();
-
-        preg_match_all("/([\x{0600}-\x{06FF}])/u", $str, $matches);
-
-        $arNum    = count($matches[0]);
-        $nonArNum = mb_strlen(str_replace(' ', '', $str), 'UTF-8') - $arNum;
-
-        if ($arNum > $nonArNum) {
-            $arStr = $str;
-            $enStr = $obj->swapAe($str);
-            $isAr  = true;
-        } else {            
-            $arStr = $obj->swapEa($str);
-            $enStr = $str;
-
-            $strCaps   = strtr($str, $capital, $small);
-            $arStrCaps = $obj->swapEa($strCaps);
-
-            $isAr = false;
-        }
-
-        $enRank = checkEn($enStr);
-        $arRank = checkAr($arStr);
-        
-        if ($arNum > $nonArNum) {
-            $arCapsRank = $arRank;
-        } else {
-            $arCapsRank = checkAr($arStrCaps);
-        }
-
-        if ($enRank > $arRank && $enRank > $arCapsRank) {
-            if ($isAr) {
-                $fix = $enStr;
-            } else {
-                preg_match_all("/([A-Z])/u", $enStr, $matches);
-                $capsNum = count($matches[0]);
-                
-                preg_match_all("/([a-z])/u", $enStr, $matches);
-                $nonCapsNum = count($matches[0]);
-                
-                if ($capsNum > $nonCapsNum && $nonCapsNum > 0) {
-                    $enCapsStr = strtr($enStr, $capital, $small);
-                    $fix       = $enCapsStr;
-                } else {
-                    $fix = '';
-                }
-            }
-        } else {
-            if ($arCapsRank > $arRank) {
-                $arStr  = $arStrCaps;
-                $arRank = $arCapsRank;
-            }
-            
-            if (!$isAr) {
-                $fix = $arStr;
-            } else {
-                $fix = '';
-            }
-        }
-
-        return $fix;
     }
 }

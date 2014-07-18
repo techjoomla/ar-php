@@ -32,7 +32,7 @@ $Arabic = new I18N_Arabic('Transliteration');
 
 $en_terms = array('George Bush, Paul Wolfowitz', 'Silvio Berlusconi?',
     'Guantanamo', 'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google',
-    'Formula1', 'Boeing', 'Caviar', 'Telephone', 'Internet');
+    'Formula1', 'Boeing', 'Caviar', 'Telephone', 'Internet', 'Weiß');
 
 echo <<< END
 <center>

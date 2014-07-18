@@ -3,8 +3,6 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 (*) Convert from and to Arabizi!
 
-(*) Add "getLanguage" method to the "CharsetD" sub class.
-
 (*) Improve "isForum" method by support detecting more forum applications.
 
 (*) Use "SVN: <svn_id>" in the version documentation tag.
@@ -12,6 +10,13 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 (*) Rewrite "KeySwap" sub class to move data out of the code and support French keyboard.
 
 (*) Add "Sort" sub class.
+
+(*) Donation button.
+
+(*) Contact us page.
+
+* Add "fixKeyboardLang" method to the "KeySwap" sub class to detect the language automatically 
+  of content supplied, currently it supports only Arabic and English language.
 
 * Deprecate "CharsetC" sub class and use "iconv" function to convert charset encoding internally.
 
@@ -22,6 +27,9 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 * Fix the "money2str" method in the "Numbers" sub class to omit print money units when basic 
   or fraction value is zero. Thanks to Abdulmajeed Alharbi <abosami2000@gmail.com>.
+
+* Fix the "en2ar" method in the "Transliteration" sub class when a character isn't plan ASCII, 
+  it will be approximated through one or several similarly looking characters.
 
 * Fix "CompressStr" sub class bug related to implement charset encoding conversion on binary 
   input/output arguments in the "compress", "decompress", "search", and "length" methods. 

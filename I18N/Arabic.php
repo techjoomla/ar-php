@@ -301,7 +301,10 @@ class I18N_Arabic
             foreach ($value as $key=>$text) {
                 $value[$key][0] = iconv('utf-8', $this->getOutputCharset(), $text[0]);
             }
-        } elseif ($methodName == 'compress') {
+        } elseif ($methodName == 'compress' 
+				  || $methodName == 'getPrayTime'
+				  || $methodName == 'str2graph'
+		) {
         } else {
             $value = iconv('utf-8', $this->getOutputCharset(), $value);
         }

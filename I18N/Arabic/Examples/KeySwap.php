@@ -36,6 +36,7 @@ echo "<u><i>Before:</i></u><br />$str<br /><br />";
 
 $text = $Arabic->swapEa($str);
 echo "<u><i>After:</i></u><br />$text<br /><br /><b>جبران خليل جبران</b>";
+
 ?>
 </div><br />
 <div class="Paragraph">
@@ -52,6 +53,7 @@ $code = <<< END
     
     \$text = \$Arabic->swapEa(\$str);
     echo "<u><i>After:</i></u><br />\$text<br /><br /><b>جبران خليل جبران</b>";
+?>
 END;
 
 highlight_string($code);
@@ -84,6 +86,58 @@ $code = <<< END
     
     \$text = \$Arabic->swapAe(\$str);
     echo "<u><i>After:</i></u><br />\$text<br /><br /><b>Albert Einstein</b>";
+?>
+END;
+
+highlight_string($code);
+
+?>
+</div>
+<br />
+<div class="Paragraph">
+<h2 dir="ltr">Example Output 3:</h2>
+<?php
+
+$example1 = "ff'z g;k fefhj";
+$example2 = "FF'Z G;K FEFHJ";
+$example3 = 'ٍمخصمغ لاعف سعقثمغ';
+$example4 = 'sLOWLY BUT SURELY';
+
+$fix1 = $Arabic->fixKeyboardLang($example1);
+$fix2 = $Arabic->fixKeyboardLang($example2);
+$fix3 = $Arabic->fixKeyboardLang($example3);
+$fix4 = $Arabic->fixKeyboardLang($example4);
+
+echo "<ul><li>$example1 => $fix1</li>";
+echo "<li>$example2 => $fix2</li>";
+echo "<li>$example3 => $fix3</li>";
+echo "<li>$example4 => $fix4</li><ul>";
+?>
+
+</div><br />
+<div class="Paragraph">
+<h2>Example Code 3:</h2>
+<?php
+$code = <<< END
+<?php
+    require '../../Arabic.php';
+    \$Arabic = new I18N_Arabic('KeySwap');
+    
+	\$example1 = "ff'z g;k fefhj";
+	\$example2 = "FF'Z G;K FEFHJ";
+	\$example3 = 'ٍمخصمغ لاعف سعقثمغ';
+	\$example4 = 'sLOWLY BUT SURELY';
+
+	\$fix1 = \$Arabic->fixKeyboardLang(\$example1);
+	\$fix2 = \$Arabic->fixKeyboardLang(\$example2);
+	\$fix3 = \$Arabic->fixKeyboardLang(\$example3);
+	\$fix4 = \$Arabic->fixKeyboardLang(\$example4);
+
+	echo "<p dir=ltr>\$example1 => \$fix1</p>";
+	echo "<p dir=ltr>\$example2 => \$fix2</p>";
+	echo "<p dir=ltr>\$example3 => \$fix3</p>";
+	echo "<p dir=ltr>\$example4 => \$fix4</p>";
+?>
 END;
 
 highlight_string($code);

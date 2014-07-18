@@ -424,7 +424,7 @@ class I18N_Arabic_Salat
     public function getPrayTime2()
     {
         $unixtimestamp = mktime(0, 0, 0, $this->month, $this->day, $this->year);
-        
+
         // Calculate Julian date
         if ($this->month <= 2) {
             $year  = $this->year - 1;
