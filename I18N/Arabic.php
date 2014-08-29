@@ -50,10 +50,10 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Shamaa
+ * @copyright 2006-2014 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   3.6.0 released in Jan 20, 2013
+ * @version   4.0 released in Aug ##, 2014
  * @link      http://www.ar-php.org
  */
 
@@ -68,7 +68,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Shamaa
+ * @copyright 2006-2014 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org
@@ -77,34 +77,11 @@ class I18N_Arabic
 {
     private $_inputCharset  = 'utf-8';
     private $_outputCharset = 'utf-8';
+    private $_compatible    = array();
+    private $_lazyLoading   = array();
     private $_useAutoload;
     private $_useException;
     private $_compatibleMode;
-    
-    private $_compatible = array('EnTransliteration'=>'Transliteration', 
-                                  'ArTransliteration'=>'Transliteration',
-                                  'ArAutoSummarize'=>'AutoSummarize',
-                                  'ArCharsetC'=>'CharsetC',
-                                  'ArCharsetD'=>'CharsetD',
-                                  'ArDate'=>'Date',
-                                  'ArGender'=>'Gender',
-                                  'ArGlyphs'=>'Glyphs',
-                                  'ArIdentifier'=>'Identifier',
-                                  'ArKeySwap'=>'KeySwap',
-                                  'ArNumbers'=>'Numbers',
-                                  'ArQuery'=>'Query',
-                                  'ArSoundex'=>'Soundex',
-                                  'ArStrToTime'=>'StrToTime',
-                                  'ArWordTag'=>'WordTag',
-                                  'ArCompressStr'=>'CompressStr',
-                                  'ArMktime'=>'Mktime',
-                                  'ArStemmer'=>'Stemmer',
-                                  'ArStandard'=>'Standard',
-                                  'ArNormalise'=>'Normalise',
-                                  'a4_max_chars'=>'a4MaxChars',
-                                  'a4_lines'=>'a4Lines',
-                                  'swap_ea'=>'swapEa',
-                                  'swap_ae'=>'swapAe');
     
     /**
      * @ignore
@@ -142,6 +119,16 @@ class I18N_Arabic
         $this->_useAutoload    = $useAutoload;
         $this->_useException   = $useException;
         $this->_compatibleMode = $compatibleMode;
+
+        $xml = simplexml_load_file(dirname(__FILE__).'/Arabic/data/config.xml');
+
+        foreach ($xml->xpath("//compatible/case") as $case) {
+            $this->_compatible["{$case['old']}"] = (string)$case;
+        }
+
+        foreach ($xml->xpath("//lazyLoading/case") as $case) {
+            $this->_lazyLoading["{$case['method']}"] = (string)$case;
+        } 
 
         /* Set internal character encoding to UTF-8 */
         mb_internal_encoding("utf-8");
@@ -232,7 +219,6 @@ class I18N_Arabic
         if ($this->_compatibleMode 
             && array_key_exists($library, $this->_compatible)
         ) {
-            
             $library = $this->_compatible[$library];
         }
 
@@ -271,6 +257,11 @@ class I18N_Arabic
             $methodName = $this->_compatible[$methodName];
         }
 
+		// setMode & getMode [Date*|Query], setLang [Soundex*|CompressStr]	
+		if ('I18N_Arabic_'.$this->_lazyLoading[$methodName] != $this->myClass) {
+			$this->load($this->_lazyLoading[$methodName]);
+		}
+
         // Create an instance of the ReflectionMethod class
         $method = new ReflectionMethod($this->myClass, $methodName);
         
@@ -298,13 +289,14 @@ class I18N_Arabic
         $value = call_user_func_array(array(&$this->myObject, $methodName), $params);
 
         if ($methodName == 'tagText') {
+            $outputCharset = $this->getOutputCharset();
             foreach ($value as $key=>$text) {
-                $value[$key][0] = iconv('utf-8', $this->getOutputCharset(), $text[0]);
+                $value[$key][0] = iconv('utf-8', $outputCharset, $text[0]);
             }
         } elseif ($methodName == 'compress' 
-				  || $methodName == 'getPrayTime'
-				  || $methodName == 'str2graph'
-		) {
+                  || $methodName == 'getPrayTime'
+                  || $methodName == 'str2graph'
+        ) {
         } else {
             $value = iconv('utf-8', $this->getOutputCharset(), $value);
         }
@@ -337,9 +329,10 @@ class I18N_Arabic
     {
         $flag = true;
         
-        $charset = strtolower($charset);
+        $charset  = strtolower($charset);
+        $charsets = array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6');
         
-        if (in_array($charset, array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6'))) {
+        if (in_array($charset, $charsets)) {
             if ($charset == 'windows-1256') {
                 $charset = 'cp1256';
             }
@@ -363,9 +356,10 @@ class I18N_Arabic
     {
         $flag = true;
         
-        $charset = strtolower($charset);
+        $charset  = strtolower($charset);
+        $charsets = array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6');
         
-        if (in_array($charset, array('utf-8', 'windows-1256', 'cp1256', 'iso-8859-6'))) {
+        if (in_array($charset, $charsets)) {
             if ($charset == 'windows-1256') {
                 $charset = 'cp1256';
             }
