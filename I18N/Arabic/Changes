@@ -5,15 +5,21 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 (*) Improve "isForum" method by support detecting more forum applications.
 
+(*) Improve WordTag sub class output.
+
 (*) Use "SVN: <svn_id>" in the version documentation tag.
 
 (*) Rewrite "KeySwap" sub class to move data out of the code and support French keyboard.
 
 (*) Add "Sort" sub class.
 
-(*) Donation button.
-
 (*) Contact us page.
+
+(*) Use the lazy loading technique (i.e. include/load sub class file automatically when detect 
+  first time call for any related method).
+
+* Fix the "en2ar" method in the "Transliteration" sub class when a character isn't plan ASCII, 
+  it will be approximated through one or several similarly looking characters.
 
 * Add "fixKeyboardLang" method to the "KeySwap" sub class to detect the language automatically 
   of content supplied, currently it supports only Arabic and English language.
@@ -28,11 +34,10 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 * Fix the "money2str" method in the "Numbers" sub class to omit print money units when basic 
   or fraction value is zero. Thanks to Abdulmajeed Alharbi <abosami2000@gmail.com>.
 
-* Fix the "en2ar" method in the "Transliteration" sub class when a character isn't plan ASCII, 
-  it will be approximated through one or several similarly looking characters.
-
 * Fix "CompressStr" sub class bug related to implement charset encoding conversion on binary 
-  input/output arguments in the "compress", "decompress", "search", and "length" methods. 
+  input/output arguments in the "compress", "decompress", "search", and "length" methods.
+
+* Upgrade FPDF library from version 1.52 to 1.7 which used in the glyphs PDF example.
 
 
 What's new in ArPHP 3.6.0 (release date: Jan 20, 2013)

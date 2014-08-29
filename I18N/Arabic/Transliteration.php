@@ -193,12 +193,13 @@ class I18N_Arabic_Transliteration
      * @return String Out of vocabulary English string in Arabic characters
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public static function en2ar($string, $locale='en_GB')
+    public static function en2ar($string, $locale='en_US')
     {
         setlocale(LC_ALL, $locale);
-		$string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
-		
-		$string = strtolower($string);
+        $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+		$string = preg_replace('/[^\w\s]/', '', $string);
+        
+        $string = strtolower($string);
         $words  = explode(' ', $string);
         $string = '';
         
