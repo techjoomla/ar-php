@@ -97,21 +97,14 @@ highlight_string($code);
 <div class="Paragraph">
 <h2 dir="ltr">Example Output 3:</h2>
 <?php
+	$examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
 
-$example1 = "ff'z g;k fefhj";
-$example2 = "FF'Z G;K FEFHJ";
-$example3 = 'ٍمخصمغ لاعف سعقثمغ';
-$example4 = 'sLOWLY BUT SURELY';
+	foreach ($examples as $example) {
+		$fix = $Arabic->fixKeyboardLang($example);
 
-$fix1 = $Arabic->fixKeyboardLang($example1);
-$fix2 = $Arabic->fixKeyboardLang($example2);
-$fix3 = $Arabic->fixKeyboardLang($example3);
-$fix4 = $Arabic->fixKeyboardLang($example4);
-
-echo "<ul><li>$example1 => $fix1</li>";
-echo "<li>$example2 => $fix2</li>";
-echo "<li>$example3 => $fix3</li>";
-echo "<li>$example4 => $fix4</li><ul>";
+		echo '<font color="red">' . $example . '</font> => ';
+		echo '<font color="blue">' . $fix . '</font><br />';
+	}
 ?>
 
 </div><br />
@@ -123,20 +116,14 @@ $code = <<< END
     require '../../Arabic.php';
     \$Arabic = new I18N_Arabic('KeySwap');
     
-	\$example1 = "ff'z g;k fefhj";
-	\$example2 = "FF'Z G;K FEFHJ";
-	\$example3 = 'ٍمخصمغ لاعف سعقثمغ';
-	\$example4 = 'sLOWLY BUT SURELY';
+	\$examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
 
-	\$fix1 = \$Arabic->fixKeyboardLang(\$example1);
-	\$fix2 = \$Arabic->fixKeyboardLang(\$example2);
-	\$fix3 = \$Arabic->fixKeyboardLang(\$example3);
-	\$fix4 = \$Arabic->fixKeyboardLang(\$example4);
+	foreach (\$examples as \$example) {
+		\$fix = \$Arabic->fixKeyboardLang(\$example);
 
-	echo "<p dir=ltr>\$example1 => \$fix1</p>";
-	echo "<p dir=ltr>\$example2 => \$fix2</p>";
-	echo "<p dir=ltr>\$example3 => \$fix3</p>";
-	echo "<p dir=ltr>\$example4 => \$fix4</p>";
+		echo '<font color="red">' . \$example . '</font> => ';
+		echo '<font color="blue">' . \$fix . '</font><br />';
+	}
 ?>
 END;
 

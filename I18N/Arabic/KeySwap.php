@@ -233,7 +233,17 @@ class I18N_Arabic_KeySwap
         return $output;
     }
 
-    protected function checkEn($str) {
+    /**
+     * Calculate the log odd probability that inserted string from keyboard
+     * is in English language
+     *           
+     * @param string $str Inserted string from the keyboard
+     *                    
+     * @return float Calculated score for input string as English language
+     * @author Khaled Al-Sham'aa
+     */
+    protected function checkEn($str) 
+    {
         $lines  = $this->_enLogodd;
         $logodd = array();
         
@@ -270,7 +280,17 @@ class I18N_Arabic_KeySwap
         return $rank;
     }
 
-    protected function checkAr($str) {
+    /**
+     * Calculate the log odd probability that inserted string from keyboard
+     * is in Arabic language
+     *           
+     * @param string $str Inserted string from the keyboard
+     *                    
+     * @return float Calculated score for input string as Arabic language
+     * @author Khaled Al-Sham'aa
+     */
+    protected function checkAr($str) 
+    {
         $lines  = $this->_arLogodd;
         $logodd = array();
         
@@ -306,7 +326,19 @@ class I18N_Arabic_KeySwap
         return $rank;
     }
     
-    public function fixKeyboardLang($str) {
+    /**
+     * This method will automatically detect the language of content supplied 
+     * in the input string. It will return the suggestion of correct inserted text. 
+     * The accuracy of the automatic language detection increases with the amount 
+     * of text entered.
+     *           
+     * @param string $str Inserted string from the keyboard
+     *                    
+     * @return string Fixed string language and letter case to the better guess
+     * @author Khaled Al-Sham'aa
+     */
+    public function fixKeyboardLang($str) 
+    {
         preg_match_all("/([\x{0600}-\x{06FF}])/u", $str, $matches);
 
         $arNum    = count($matches[0]);
