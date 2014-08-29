@@ -199,6 +199,7 @@ class I18N_Arabic_Query
     private $_fields          = array();
     private $_lexPatterns     = array();
     private $_lexReplacements = array();
+    private $_mode            = 0;
 
     /**
      * Loads initialize values
@@ -267,7 +268,7 @@ class I18N_Arabic_Query
     {
         if (in_array($mode, array('0', '1'))) {
             // Set search mode [0 for OR logic | 1 for AND logic]
-            $this->mode = $mode;
+            $this->_mode = $mode;
         }
         
         return $this;
@@ -283,7 +284,7 @@ class I18N_Arabic_Query
     public function getMode()
     {
         // Get search mode value [0 for OR logic | 1 for AND logic]
-        return $this->mode;
+        return $this->_mode;
     }
     
     /**
@@ -364,9 +365,9 @@ class I18N_Arabic_Query
         }
         
         if (!empty($this->wordCondition)) {
-            if ($this->mode == 0) {
+            if ($this->_mode == 0) {
                 $sql = '(' . implode(') OR (', $this->wordCondition) . ')';
-            } elseif ($this->mode == 1) {
+            } elseif ($this->_mode == 1) {
                 $sql = '(' . implode(') AND (', $this->wordCondition) . ')';
             }
         }
