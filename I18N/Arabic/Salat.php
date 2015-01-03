@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2013 Khaled Al-Sham'aa
+ * Copyright (c) 2006-2015 Khaled Al-Sham'aa
  *  
  * http://www.ar-php.org
  *  
@@ -149,7 +149,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -173,7 +173,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -567,6 +567,12 @@ class I18N_Arabic_Salat
             $Midnight = $MidnightShia;
         }
 
+		// Result.ThlthAkhir:= Result.Fajr-(24-Result.Maghrib + Result.Fajr)/3;
+        // Result.Doha      := Result.Sunrise+(15/60);
+		// if isRamadan then (Um-Al-Qura calendar)
+        // Result.Isha := Result.Maghrib+2 
+		// else Result.Isha := Result.Maghrib+1.5;
+		
         $times = array($Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib, $Isha, $Sunset, 
                 $Midnight, $Imsak);
         

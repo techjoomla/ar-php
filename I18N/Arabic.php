@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2013 Khaled Al-Shamaa.
+ * Copyright (c) 2006-2015 Khaled Al-Shamaa.
  *  
  * http://www.ar-php.org
  *  
@@ -50,7 +50,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2014 Khaled Al-Shamaa
+ * @copyright 2006-2015 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @version   4.0 released in Sep ##, 2014; SVN: $Id$
@@ -68,7 +68,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2014 Khaled Al-Shamaa
+ * @copyright 2006-2015 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org

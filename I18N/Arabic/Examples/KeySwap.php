@@ -10,7 +10,7 @@
 <body>
 
 <div class="Paragraph" dir="rtl">
-<h2 dir="ltr">Example Output 1:</h2>
+<h2 dir="ltr">Example Output 1 (a):</h2>
 <?php
 /**
  * Example of Convert keyboard language programmatically (English - Arabic)
@@ -32,15 +32,15 @@ $Arabic = new I18N_Arabic('KeySwap');
 
 $str = "Hpf lk hgkhs hglj'vtdkK Hpf hg`dk dldg,k f;gdjil Ygn
 ,p]hkdm hgHl,v tb drt,k ljv]]dk fdk krdqdk>";
-echo "<u><i>Before:</i></u><br />$str<br /><br />";
+echo "<u><i>Before - English Keyboard:</i></u><br />$str<br /><br />";
 
 $text = $Arabic->swapEa($str);
-echo "<u><i>After:</i></u><br />$text<br /><br /><b>جبران خليل جبران</b>";
+echo "<u><i>After:</i></u><br />$text<br /><br />";
 
 ?>
 </div><br />
 <div class="Paragraph">
-<h2>Example Code 1:</h2>
+<h2>Example Code 1 (a):</h2>
 <?php
 $code = <<< END
 <?php
@@ -49,10 +49,44 @@ $code = <<< END
 
     \$str = "Hpf lk hgkhs hglj'vtdkK Hpf hg`dk dldg,k f;gdjil Ygn
     ,p]hkdm hgHl,v tb drt,k ljv]]dk fdk krdqdk>";
-    echo "<u><i>Before:</i></u><br />\$str<br /><br />";
+    echo "<u><i>Before - English Keyboard:</i></u><br />\$str<br /><br />";
     
     \$text = \$Arabic->swapEa(\$str);
-    echo "<u><i>After:</i></u><br />\$text<br /><br /><b>جبران خليل جبران</b>";
+    echo "<u><i>After:</i></u><br />\$text<br /><br />";
+?>
+END;
+
+highlight_string($code);
+
+?>
+</div>
+<br />
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output 1 (b):</h2>
+<?php
+$str = 'Hpf lk hgkhs hgljùvtdkK Hpf hg²dk dldg;k fmgdjil Ygn 
+;p$hkd, hgHl;v tb drt;k ljv$$dk fdk krdadk/';
+echo "<u><i>Before - French Keyboard:</i></u><br />$str<br /><br />";
+
+$text = $Arabic->swapFa($str);
+echo "<u><i>After:</i></u><br />$text<br /><br /><b>جبران خليل جبران</b>";
+
+?>
+</div><br />
+<div class="Paragraph">
+<h2>Example Code 1 (b):</h2>
+<?php
+$code = <<< END
+<?php
+    require '../../Arabic.php';
+    \$Arabic = new I18N_Arabic('KeySwap');
+
+	\$str = 'Hpf lk hgkhs hgljùvtdkK Hpf hg²dk dldg;k fmgdjil Ygn 
+	;p\$hkd, hgHl;v tb drt;k ljv\$\$dk fdk krdadk/';
+	echo "<u><i>Before - French Keyboard:</i></u><br />\$str<br /><br />";
+
+	\$text = \$Arabic->swapFa(\$str);
+	echo "<u><i>After:</i></u><br />\$text<br /><br /><b>جبران خليل جبران</b>";
 ?>
 END;
 

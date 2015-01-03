@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2015 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -98,7 +98,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -121,7 +121,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -137,6 +137,8 @@ class I18N_Arabic_WordTag
     private static $_normalizeDiacritics = array('َ','ً','ُ','ٌ',
                                                  'ِ','ٍ','ْ','ّ');
 
+    private $_commonWords = array();
+
     /**
      * Loads initialize values
      *
@@ -144,6 +146,10 @@ class I18N_Arabic_WordTag
      */         
     public function __construct()
     {
+        $words = file(dirname(__FILE__).'/data/ar-stopwords.txt');
+        $words = array_map('trim', $words);
+        
+        $this->_commonWords = $words;
     }
     
     /**
@@ -346,6 +352,7 @@ class I18N_Arabic_WordTag
                     $html .= "</span> \r\n";
                 }
             } else {
+                #if ($tag == 1 && !in_array($word, $this->_commonWords)) {
                 if ($tag == 1) {
                     $html .= " \r\n<span class=\"" . $style ."\">";
                 }

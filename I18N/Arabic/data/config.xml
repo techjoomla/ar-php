@@ -40,7 +40,8 @@
 		<case method="cleanCommon">AutoSummarize</case>
 		<case method="guess">CharsetD</case>
 		<case method="getCharset">CharsetD</case>
-		<case method="setLang">CompressStr</case>
+		<!-- Conflict with Soundex class similar methods -->
+		<!-- <case method="setLang">CompressStr</case> -->
 		<case method="compress">CompressStr</case>
 		<case method="decompress">CompressStr</case>
 		<case method="search">CompressStr</case>
@@ -60,6 +61,8 @@
 		<case method="isArabic">Identifier</case>
 		<case method="swapAe">KeySwap</case>
 		<case method="swapEa">KeySwap</case>
+		<case method="swapAf">KeySwap</case>
+		<case method="swapFa">KeySwap</case>
 		<case method="fixKeyboardLang">KeySwap</case>
 		<case method="mktime">Mktime</case>
 		<case method="mktimeCorrection">Mktime</case>
@@ -99,8 +102,9 @@
 		<case method="int2indic">Numbers</case>
 		<case method="setArrFields">Query</case>
 		<case method="setStrFields">Query</case>
-		<case method="setMode">Query</case>
-		<case method="getMode">Query</case>
+		<!-- Conflict with Date class similar methods -->
+		<!-- <case method="setMode">Query</case> -->
+		<!-- <case method="getMode">Query</case> -->
 		<case method="getArrFields">Query</case>
 		<case method="getStrFields">Query</case>
 		<case method="getWhereCondition">Query</case>

@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2013 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2015 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -146,7 +146,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -169,7 +169,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2013 Khaled Al-Sham'aa
+ * @copyright 2006-2015 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
@@ -200,6 +200,7 @@ class I18N_Arabic_Date
      *                       5) Libya style
      *                       6) Algeria and Tunis style
      *                       7) Morocco style          
+     *                       8) Hijri format (Islamic calendar) in English
      *                                   
      * @return object $this to build a fluent interface
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -208,7 +209,7 @@ class I18N_Arabic_Date
     {
         $mode = (int) $mode;
         
-        if ($mode > 0 && $mode < 8) {
+        if ($mode > 0 && $mode < 9) {
             $this->_mode = $mode;
         }
         
@@ -222,6 +223,9 @@ class I18N_Arabic_Date
      *               3) Arabic Transliteration of Gregorian month names
      *               4) Both of 2 and 3 formats together
      *               5) Libyan way
+     *               6) Algeria and Tunis style
+     *               7) Morocco style          
+     *               8) Hijri format (Islamic calendar) in English
      *                           
      * @return Integer Value of $mode properity
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -246,10 +250,18 @@ class I18N_Arabic_Date
      */
     public function date($format, $timestamp, $correction = 0)
     {
-        if ($this->_mode == 1) {
-            foreach ($this->_xml->hj_month->month as $month) {
-                $hj_txt_month["{$month['id']}"] = (string)$month;
-            } 
+        if ($this->_mode == 1 || $this->_mode == 8) {
+            if ($this->_mode == 1) {
+				foreach ($this->_xml->ar_hj_month->month as $month) {
+					$hj_txt_month["{$month['id']}"] = (string)$month;
+				} 
+			}
+			
+			if ($this->_mode == 8) {
+				foreach ($this->_xml->en_hj_month->month as $month) {
+					$hj_txt_month["{$month['id']}"] = (string)$month;
+				} 
+			}
             
             $patterns     = array();
             $replacements = array();
@@ -270,11 +282,18 @@ class I18N_Arabic_Date
             array_push($replacements, 'x6');
             array_push($patterns, 'd');
             array_push($replacements, 'x7');
+			
+            if ($this->_mode == 8) {
+				array_push($patterns, 'S');
+				array_push($replacements, '');
+			}
             
             $format = str_replace($patterns, $replacements, $format);
             
             $str = date($format, $timestamp);
-            $str = $this->en2ar($str);
+            if ($this->_mode == 1) {
+				$str = $this->en2ar($str);
+			}
 
             $timestamp       = $timestamp + 3600*24*$correction;
             list($Y, $M, $D) = explode(' ', date('Y m d', $timestamp));

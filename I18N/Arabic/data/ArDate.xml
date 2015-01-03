@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data file="ArDate">
   <!--
-  Islamic lunar month represented in the id property and Arabic name of that 
-  Hijri month in the content of the month tag
+  Islamic lunar month represented in the id property and Arabic and English 
+  name of that Hijri month in the content of the month tag
   -->
-  <hj_month>
+  <ar_hj_month>
     <month id="1">محرم</month>
     <month id="2">صفر</month>
     <month id="3">ربيع الأول</month>
@@ -17,7 +17,22 @@
     <month id="10">شوال</month>
     <month id="11">ذو القعدة</month>
     <month id="12">ذو الحجة</month>
-  </hj_month>
+  </ar_hj_month>
+
+  <en_hj_month>
+    <month id="1">Muharram</month>
+    <month id="2">Safar</month>
+    <month id="3">Rabi' I</month>
+    <month id="4">Rabi' II</month>
+    <month id="5">Jumada I</month>
+    <month id="6">Jumada II</month>
+    <month id="7">Rajab</month>
+    <month id="8">Sha'aban</month>
+    <month id="9">Ramadan</month>
+    <month id="10">Shawwal</month>
+    <month id="11">Dhu al-Qi'dah</month>
+    <month id="12">Dhu al-Hijjah</month>
+  </en_hj_month>
   
   <!--
   Arabic representation for name of year months in different styles refer to by 

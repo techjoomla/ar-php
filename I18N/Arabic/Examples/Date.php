@@ -43,6 +43,10 @@ $day = $Arabic->date('j', $time, $correction);
 echo ' [<a href="Moon.php?day='.$day.'" target=_blank>القمر الليلة</a>]';
 echo '<br /><br />';
 
+$Arabic->setMode(8);
+echo $Arabic->date('l dS F Y h:i:s A', $time, $correction);
+echo '<br /><br />';
+
 $Arabic->setMode(2);
 echo $Arabic->date('l dS F Y h:i:s A', $time);
 echo '<br /><br />';
@@ -88,6 +92,10 @@ $code = <<< END
     \$day = \$Arabic->date('j', \$time, \$correction);
     echo ' [<a href="Moon.php?day='.\$day.'" target=_blank>القمر الليلة</a>]';
     echo '<br /><br />';
+
+	\$Arabic->setMode(8);
+	echo \$Arabic->date('l dS F Y h:i:s A', \$time, \$correction);
+	echo '<br /><br />';
 
     \$Arabic->setMode(2);
     echo \$Arabic->date('l dS F Y h:i:s A', \$time);
