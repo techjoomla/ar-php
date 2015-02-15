@@ -252,16 +252,16 @@ class I18N_Arabic_Date
     {
         if ($this->_mode == 1 || $this->_mode == 8) {
             if ($this->_mode == 1) {
-				foreach ($this->_xml->ar_hj_month->month as $month) {
-					$hj_txt_month["{$month['id']}"] = (string)$month;
-				} 
-			}
-			
-			if ($this->_mode == 8) {
-				foreach ($this->_xml->en_hj_month->month as $month) {
-					$hj_txt_month["{$month['id']}"] = (string)$month;
-				} 
-			}
+                foreach ($this->_xml->ar_hj_month->month as $month) {
+                    $hj_txt_month["{$month['id']}"] = (string)$month;
+                } 
+            }
+            
+            if ($this->_mode == 8) {
+                foreach ($this->_xml->en_hj_month->month as $month) {
+                    $hj_txt_month["{$month['id']}"] = (string)$month;
+                } 
+            }
             
             $patterns     = array();
             $replacements = array();
@@ -282,18 +282,18 @@ class I18N_Arabic_Date
             array_push($replacements, 'x6');
             array_push($patterns, 'd');
             array_push($replacements, 'x7');
-			
+            
             if ($this->_mode == 8) {
-				array_push($patterns, 'S');
-				array_push($replacements, '');
-			}
+                array_push($patterns, 'S');
+                array_push($replacements, '');
+            }
             
             $format = str_replace($patterns, $replacements, $format);
             
             $str = date($format, $timestamp);
             if ($this->_mode == 1) {
-				$str = $this->en2ar($str);
-			}
+                $str = $this->en2ar($str);
+            }
 
             $timestamp       = $timestamp + 3600*24*$correction;
             list($Y, $M, $D) = explode(' ', date('Y m d', $timestamp));

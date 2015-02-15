@@ -352,7 +352,7 @@ class I18N_Arabic_WordTag
                     $html .= "</span> \r\n";
                 }
             } else {
-                #if ($tag == 1 && !in_array($word, $this->_commonWords)) {
+                // if ($tag == 1 && !in_array($word, $this->_commonWords)) {
                 if ($tag == 1) {
                     $html .= " \r\n<span class=\"" . $style ."\">";
                 }

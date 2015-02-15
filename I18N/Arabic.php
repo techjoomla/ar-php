@@ -432,7 +432,7 @@ class I18N_Arabic
      *                text_email, and html_email)
      * @author Khaled Al-Shamaa <khaled@ar-php.org>
      */
-    public static function header($mode = 'http', $conn = null)
+    public function header($mode = 'http', $conn = null)
     {
         $mode = strtolower($mode);
         $head = '';

@@ -197,7 +197,7 @@ class I18N_Arabic_Transliteration
     {
         setlocale(LC_ALL, $locale);
         $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
-		$string = preg_replace('/[^\w\s]/', '', $string);
+        $string = preg_replace('/[^\w\s]/', '', $string);
         
         $string = strtolower($string);
         $words  = explode(' ', $string);

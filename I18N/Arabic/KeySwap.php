@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2015 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2015 Khaled Al-Sham'aa
  *  
  * http://www.ar-php.org
  *  
@@ -55,9 +55,9 @@
  * include: b, B, G and T).
  * 
  * Well, we try in this class to come over this issue by suppose that user used 
- * optimum way by using short-cut keys when available instead of assemble chars using 
- * stand alone keys, but if (s)he does not then you may have some typo chars in 
- * converted text.
+ * optimum way by using short-cut keys when available instead of assemble chars  
+ * using stand alone keys, but if (s)he does not then you may have some typo chars 
+ * in converted text.
  * 
  * Example:
  * <code>
@@ -109,10 +109,10 @@ class I18N_Arabic_KeySwap
     private $_transliteration = array();
     private $_arLogodd;
     private $_enLogodd;
-	
-	private $_arKeyboard;
-	private $_enKeyboard;
-	private $_frKeyboard;
+    
+    private $_arKeyboard;
+    private $_enKeyboard;
+    private $_frKeyboard;
     
     /**
      * Loads initialize values
@@ -161,7 +161,7 @@ class I18N_Arabic_KeySwap
      */
     public function swapAe($text)
     {
-        $output = $this->swapCore($text, 'ar', 'en');
+        $output = $this->_swapCore($text, 'ar', 'en');
         
         return $output;
     }
@@ -178,8 +178,8 @@ class I18N_Arabic_KeySwap
      */
     public function swapEa($text)
     {
-        $output = $this->swapCore($text, 'en', 'ar');
-		
+        $output = $this->_swapCore($text, 'en', 'ar');
+        
         return $output;
     }
     
@@ -195,7 +195,7 @@ class I18N_Arabic_KeySwap
      */
     public function swapAf($text)
     {
-        $output = $this->swapCore($text, 'ar', 'fr');
+        $output = $this->_swapCore($text, 'ar', 'fr');
         
         return $output;
     }
@@ -212,68 +212,68 @@ class I18N_Arabic_KeySwap
      */
     public function swapFa($text)
     {
-        $output = $this->swapCore($text, 'fr', 'ar');
-		
+        $output = $this->_swapCore($text, 'fr', 'ar');
+        
         return $output;
     }
     
     /**
      * Make conversion between different keyboard maps to swap odd text in
-	 * one language by original meaningful text in another language that 
+     * one language by original meaningful text in another language that 
      * you meant when you type on your keyboard (if keyboard language was  
      * incorrect)
      *           
      * @param string $text Odd string
-	 * @param string $in   Input language [ar|en|fr]
-	 * @param string $out  Output language [ar|en|fr]
+     * @param string $in   Input language [ar|en|fr]
+     * @param string $out  Output language [ar|en|fr]
      *                    
      * @return string Normal string
      * @author Khaled Al-Sham'aa
      */
-	private function swapCore($text, $in, $out)
+    private function _swapCore($text, $in, $out)
     {
         $output = '';
         $text   = stripslashes($text);
-		$max    = mb_strlen($text);
-		
-		switch ($in) {
-			case 'ar':
-				$inputMap = $this->_arKeyboard;
-				break;
-			case 'en':
-				$inputMap = $this->_enKeyboard;
-				break;
-			case 'fr':
-				$inputMap = $this->_frKeyboard;
-				break;
-		}
-		
-		switch ($out) {
-			case 'ar':
-				$outputMap = $this->_arKeyboard;
-				break;
-			case 'en':
-				$outputMap = $this->_enKeyboard;
-				break;
-			case 'fr':
-				$outputMap = $this->_frKeyboard;
-				break;
-		}
-		
-		for ($i=0; $i<$max; $i++) {
-			$chr = mb_substr($text, $i, 1);
-			$key = array_search($chr, $inputMap);
-			
-			if ($key === false) {
-				$output .= $chr;
-			} else {
-				$output .= $outputMap[$key];
-			}
-		}
-		
-		return $output;
-	}
-	
+        $max    = mb_strlen($text);
+        
+        switch ($in) {
+        case 'ar':
+            $inputMap = $this->_arKeyboard;
+            break;
+        case 'en':
+            $inputMap = $this->_enKeyboard;
+            break;
+        case 'fr':
+            $inputMap = $this->_frKeyboard;
+            break;
+        }
+        
+        switch ($out) {
+        case 'ar':
+            $outputMap = $this->_arKeyboard;
+            break;
+        case 'en':
+            $outputMap = $this->_enKeyboard;
+            break;
+        case 'fr':
+            $outputMap = $this->_frKeyboard;
+            break;
+        }
+        
+        for ($i=0; $i<$max; $i++) {
+            $chr = mb_substr($text, $i, 1);
+            $key = array_search($chr, $inputMap);
+            
+            if ($key === false) {
+                $output .= $chr;
+            } else {
+                $output .= $outputMap[$key];
+            }
+        }
+        
+        return $output;
+    }
+    
     /**
      * Calculate the log odd probability that inserted string from keyboard
      * is in English language

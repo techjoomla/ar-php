@@ -22,7 +22,7 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 * Add "fixKeyboardLang" method to the "KeySwap" sub class to detect the language automatically 
   of content supplied, currently it supports only Arabic and English language.
 
-* Add mode 8 option to the "date" method in the "Date" sub class which presents date in Hijri format 
+* Add new option to the "date" method in the "Date" sub class which presents date in Hijri format 
   from (i.e. Islamic calendar) using in English language. Thanks to Cédric Dupont <lunarok@gmail.com>.
   
 * Fix the "en2ar" method in the "Transliteration" sub class when a character isn't plan ASCII, 
@@ -36,6 +36,9 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 * Fix the compatibility issues with PHP 5.3, 5.4, and 5.5 reported by PHP_CodeSniffer using 
   PHPCompatibility standards.
+
+* Fix an issue of static methods use reference to $this object! Thank you
+  Damien Seguy <damien.seguy@gmail.com> to highlight this bug.
 
 * Check and fix warnings of the PEAR coding standard.
 

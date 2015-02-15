@@ -167,7 +167,7 @@ class I18N_Arabic_CompressStr
      * @return object $this to build a fluent interface
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public static function setLang($lang) 
+    public function setLang($lang) 
     {
         switch ($lang) {
         case 'en':

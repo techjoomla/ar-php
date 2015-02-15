@@ -567,12 +567,12 @@ class I18N_Arabic_Salat
             $Midnight = $MidnightShia;
         }
 
-		// Result.ThlthAkhir:= Result.Fajr-(24-Result.Maghrib + Result.Fajr)/3;
+        // Result.ThlthAkhir:= Result.Fajr-(24-Result.Maghrib + Result.Fajr)/3;
         // Result.Doha      := Result.Sunrise+(15/60);
-		// if isRamadan then (Um-Al-Qura calendar)
+        // if isRamadan then (Um-Al-Qura calendar)
         // Result.Isha := Result.Maghrib+2 
-		// else Result.Isha := Result.Maghrib+1.5;
-		
+        // else Result.Isha := Result.Maghrib+1.5;
+        
         $times = array($Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib, $Isha, $Sunset, 
                 $Midnight, $Imsak);
         
