@@ -102,7 +102,7 @@ highlight_string($code);
 </div><br />
 
 <div class="Paragraph" dir="rtl">
-<h2 dir="ltr">Example Output 3: المعدود مؤنث منصوب أو مجرور بفاصلة</h2>
+<h2 dir="ltr">Example Output 3: المعدود مؤنث منصوب أو مجرور وهو سالب بفاصلة عشرية</h2>
 <?php
     $Arabic->setFeminine(2);
     $Arabic->setFormat(2);
