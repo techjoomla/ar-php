@@ -464,6 +464,7 @@ class I18N_Arabic_Salat
         
         $RA = rad2deg(atan2(cos(deg2rad($e))* sin(deg2rad($L)), cos(deg2rad($L))))
             / 15;
+        
         if ($RA < 0) {
             $RA = 24 + $RA;
         }
@@ -486,7 +487,10 @@ class I18N_Arabic_Salat
         
         // Dhuhr
         // When the Sun begins to decline after reaching its highest point in the sky
-        $Dhuhr = 12 + $this->zone - ($this->long/15) - $EqT; 
+        $Dhuhr = 12 + $this->zone - ($this->long/15) - $EqT;
+        if ($Dhuhr < 0) {
+            $Dhuhr = 24 + $Dhuhr;
+        }
         
         // Sunrise & Sunset 
         // If the observer's location is higher than the surrounding terrain, we 
