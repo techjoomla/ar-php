@@ -257,10 +257,10 @@ class I18N_Arabic
             $methodName = $this->_compatible[$methodName];
         }
 
-		// setMode & getMode [Date*|Query], setLang [Soundex*|CompressStr]	
-		if ('I18N_Arabic_'.$this->_lazyLoading[$methodName] != $this->myClass) {
-			$this->load($this->_lazyLoading[$methodName]);
-		}
+        // setMode & getMode [Date*|Query], setLang [Soundex*|CompressStr]  
+        if ('I18N_Arabic_'.$this->_lazyLoading[$methodName] != $this->myClass) {
+            $this->load($this->_lazyLoading[$methodName]);
+        }
 
         // Create an instance of the ReflectionMethod class
         $method = new ReflectionMethod($this->myClass, $methodName);
