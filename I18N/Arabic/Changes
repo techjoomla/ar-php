@@ -1,4 +1,4 @@
-What's new in ArPHP 4.0 (release date: Aug ##, 2014)
+What's new in ArPHP 4.0 (release date: Apr ##, 2015)
 -----------------------------------------------------
 
 (*) Add ThlthAkhir and Doha times calculations to Salat class
@@ -7,9 +7,11 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 (*) Fix/check um_alqoura Hijri calendar.
 
+(*) Fix prayer time for UOIF calendar using 12° and sunrise arc of (-0.61)
+
 (*) Contact us information, Donation button, East and Latin America case notation, check links.
 
-(*) Create Documentation, Create PEAR package, Create Phar package, Create Composer package.
+(*) Create Documentation, Create PEAR package, Create Phar package, Create Composer package (Muaid Al-Mohammadi <dr.muaid@gmail.com>).
 
 (*) Update and check live-demo, update online demo/example pages with new features, FAQ and BINARY SORT SQL.
 
@@ -39,8 +41,18 @@ What's new in ArPHP 4.0 (release date: Aug ##, 2014)
 
 * Fix an issue of static methods use reference to $this object! Thank you
   Damien Seguy <damien.seguy@gmail.com> to highlight this bug.
+  
+* Fix the "getPrayTime" method in the "Salat" sub class to avoid wired negative time resulted
+  in some cases (e.g. Mar 21 and 22). Thanks to **** <mawakitt@gmail.com>.
+
+* Fix the bug of not always defined $chars[$i + 1] in the method "preConvert" at "Glyphs.php" file.
+  Thanks to Mustapha Al-Sahli <mustapha.sahli.1993@gmail.com>.
 
 * Check and fix warnings of the PEAR coding standard.
+
+* Improve "City" example by add link to show city location at Google maps.
+
+* Fix deprecated functions issue in both "Query" sub class and "SafeUploadTransliter" example.
 
 * Deprecate "CharsetC" sub class and use "iconv" function to convert charset encoding internally.
 
