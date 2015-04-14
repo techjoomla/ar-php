@@ -48,6 +48,7 @@ try {
     if (!empty($result['latitude'])) {
         echo 'Latitude: ' . $result['latitude'];
         echo ', Longitude: ' . $result['longitude'];
+        echo ', <a href="http://maps.google.com/maps?ll=' . $result['latitude'] . ',' . $result['longitude'] . '&t=h&z=12" target=_blank>Google Map</a>';
         echo '<br /><br />';
     }
     
