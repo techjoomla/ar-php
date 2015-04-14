@@ -81,7 +81,7 @@ foreach ($xml as $country) {
     }
     
     // convert current time to GMT based on time zone offset
-    $gmtime = time() - (int)substr(date('O'),0,3)*60*60; 
+    $gmtime = time() - (int)substr(date('O'), 0, 3)*60*60; 
     
     echo '<td>'.$timezone.' GMT</td>';
     echo '<td>'.date('G:i', $gmtime+$timezone*3600).'</td>';
