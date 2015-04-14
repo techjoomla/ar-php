@@ -37,8 +37,12 @@ if (isset($_POST['submit'])) {
         if ($_FILES['image']['size'] < 1048576) {
 
             // Detect MIME Content-type for a file 
-            $mime = mime_content_type($_FILES['image']['tmp_name']);
-            
+            if (function_exists('mime_content_type')) {
+                $mime = mime_content_type($_FILES['image']['tmp_name']);
+            } else {
+                $mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $_FILES['image']['tmp_name']);
+            }
+
             // List of accepted MIME Content-type
             $images = array('image/jpeg', 'image/gif', 'image/png', 'image/svg+xml');
 
@@ -50,7 +54,7 @@ if (isset($_POST['submit'])) {
 
                 // Moves an uploaded file to a new location
                 // move_uploaded_file ($_FILES['image']['tmp_name'], $dir.DIRECTORY_SEPARATOR.$filename);
-                echo "move_uploaded_file(\$_FILES['image']['tmp_name'], \$dir.DIRECTORY_SEPARATOR.'$filename');";
+                echo "move_uploaded_file(\$_FILES['image']['tmp_name'], \$dir.DIRECTORY_SEPARATOR.\"$filename\");";
             } else {
                 echo '<h3>You can upload image file only (i.e. gif, jpg, png, and svg)!</h3>';
             }
