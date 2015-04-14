@@ -25,9 +25,11 @@ $blue  = imagecolorallocate($im, 0, 0, 255);
 $white = imagecolorallocate($im, 255, 255, 255);
 
 // Replace by your own font full path and name
-$path  = substr($_SERVER['SCRIPT_FILENAME'], 0, 
-                strrpos($_SERVER['SCRIPT_FILENAME'], '/'));
-$font  = $path.'/GD/ae_AlHor.ttf';
+$path = substr(
+    $_SERVER['SCRIPT_FILENAME'], 0, 
+    strrpos($_SERVER['SCRIPT_FILENAME'], '/')
+);
+$font = $path.'/GD/ae_AlHor.ttf';
 
 // UTF-8 charset
 $text = 'بسم الله الرحمن الرحيم';

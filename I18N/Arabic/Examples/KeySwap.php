@@ -81,12 +81,12 @@ $code = <<< END
     require '../../Arabic.php';
     \$Arabic = new I18N_Arabic('KeySwap');
 
-	\$str = 'Hpf lk hgkhs hgljùvtdkK Hpf hg²dk dldg;k fmgdjil Ygn 
-	;p\$hkd, hgHl;v tb drt;k ljv\$\$dk fdk krdadk/';
-	echo "<u><i>Before - French Keyboard:</i></u><br />\$str<br /><br />";
+    \$str = 'Hpf lk hgkhs hgljùvtdkK Hpf hg²dk dldg;k fmgdjil Ygn 
+    ;p\$hkd, hgHl;v tb drt;k ljv\$\$dk fdk krdadk/';
+    echo "<u><i>Before - French Keyboard:</i></u><br />\$str<br /><br />";
 
-	\$text = \$Arabic->swapFa(\$str);
-	echo "<u><i>After:</i></u><br />\$text<br /><br /><b>جبران خليل جبران</b>";
+    \$text = \$Arabic->swapFa(\$str);
+    echo "<u><i>After:</i></u><br />\$text<br /><br /><b>جبران خليل جبران</b>";
 ?>
 END;
 
@@ -131,14 +131,14 @@ highlight_string($code);
 <div class="Paragraph">
 <h2 dir="ltr">Example Output 3:</h2>
 <?php
-	$examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
+    $examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
 
-	foreach ($examples as $example) {
-		$fix = $Arabic->fixKeyboardLang($example);
+    foreach ($examples as $example) {
+        $fix = $Arabic->fixKeyboardLang($example);
 
-		echo '<font color="red">' . $example . '</font> => ';
-		echo '<font color="blue">' . $fix . '</font><br />';
-	}
+        echo '<font color="red">' . $example . '</font> => ';
+        echo '<font color="blue">' . $fix . '</font><br />';
+    }
 ?>
 
 </div><br />
@@ -150,14 +150,14 @@ $code = <<< END
     require '../../Arabic.php';
     \$Arabic = new I18N_Arabic('KeySwap');
     
-	\$examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
+    \$examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
 
-	foreach (\$examples as \$example) {
-		\$fix = \$Arabic->fixKeyboardLang(\$example);
+    foreach (\$examples as \$example) {
+        \$fix = \$Arabic->fixKeyboardLang(\$example);
 
-		echo '<font color="red">' . \$example . '</font> => ';
-		echo '<font color="blue">' . \$fix . '</font><br />';
-	}
+        echo '<font color="red">' . \$example . '</font> => ';
+        echo '<font color="blue">' . \$fix . '</font><br />';
+    }
 ?>
 END;
 
