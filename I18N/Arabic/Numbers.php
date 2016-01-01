@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2015 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2016 Khaled Al-Sham'aa.
  *  
  * http://www.ar-php.org
  *  
@@ -95,22 +95,11 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Sham'aa
+ * @copyright 2006-2016 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
  */
-
-// New in PHP V5.3: Namespaces
-// namespace I18N\Arabic;
-// 
-// $obj = new I18N\Arabic\Numbers();
-// 
-// use I18N\Arabic;
-// $obj = new Arabic\Numbers();
-//
-// use I18N\Arabic\Numbers as Numbers;
-// $obj = new Numbers();
 
 /**
  * This PHP class spell numbers in the Arabic idiom
@@ -118,7 +107,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Sham'aa
+ * @copyright 2006-2016 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 

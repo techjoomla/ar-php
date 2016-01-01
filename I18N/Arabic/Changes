@@ -1,19 +1,5 @@
-What's new in ArPHP 4.0 (release date: Apr ##, 2015)
+What's new in ArPHP 4.0 (release date: May 10, 2015)
 -----------------------------------------------------
-
-(*) Add ThlthAkhir and Doha times calculations to Salat class
-
-(*) Improve WordTag sub class output.
-
-(*) Fix/check um_alqoura Hijri calendar.
-
-(*) Fix prayer time for UOIF calendar using 12° and sunrise arc of (-0.61)
-
-(*) Contact us information, Donation button, East and Latin America case notation, check links.
-
-(*) Create Documentation, Create PEAR package, Create Phar package, Create Composer package (Muaid Al-Mohammadi <dr.muaid@gmail.com>).
-
-(*) Update and check live-demo, update online demo/example pages with new features, FAQ and BINARY SORT SQL.
 
 * Implement the lazy loading technique (i.e. include/load sub class file automatically when 
   detect first time call for any related method).
@@ -26,6 +12,9 @@ What's new in ArPHP 4.0 (release date: Apr ##, 2015)
 
 * Add new option to the "date" method in the "Date" sub class which presents date in Hijri format 
   from (i.e. Islamic calendar) using in English language. Thanks to Cédric Dupont <lunarok@gmail.com>.
+
+* Deprecate "CharsetC" sub class and simplify the internal chartset conversion mechanism using "iconv" 
+  function to be more efficient.
   
 * Fix the "en2ar" method in the "Transliteration" sub class when a character isn't plan ASCII, 
   it will be approximated through one or several similarly looking characters.
@@ -39,11 +28,11 @@ What's new in ArPHP 4.0 (release date: Apr ##, 2015)
 * Fix the compatibility issues with PHP 5.3, 5.4, and 5.5 reported by PHP_CodeSniffer using 
   PHPCompatibility standards.
 
-* Fix an issue of static methods use reference to $this object! Thank you
-  Damien Seguy <damien.seguy@gmail.com> to highlight this bug.
+* Fix an issue of static methods use reference to $this object! Thanks to Damien Seguy 
+  <damien.seguy@gmail.com> to highlight this bug.
   
 * Fix the "getPrayTime" method in the "Salat" sub class to avoid wired negative time resulted
-  in some cases (e.g. Mar 21 and 22). Thanks to **** <mawakitt@gmail.com>.
+  in some cases (e.g. Mar 21 and 22). Thanks to Mawakitt developers <mawakitt@gmail.com>.
 
 * Fix the bug of not always defined $chars[$i + 1] in the method "preConvert" at "Glyphs.php" file.
   Thanks to Mustapha Al-Sahli <mustapha.sahli.1993@gmail.com>.
@@ -53,8 +42,6 @@ What's new in ArPHP 4.0 (release date: Apr ##, 2015)
 * Improve "City" example by add link to show city location at Google maps.
 
 * Fix deprecated functions issue in both "Query" sub class and "SafeUploadTransliter" example.
-
-* Deprecate "CharsetC" sub class and use "iconv" function to convert charset encoding internally.
 
 * Upgrade FPDF library from version 1.52 to 1.7 which used in the glyphs PDF example.
 

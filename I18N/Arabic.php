@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2015 Khaled Al-Shamaa.
+ * Copyright (c) 2006-2016 Khaled Al-Shamaa.
  *  
  * http://www.ar-php.org
  *  
@@ -50,17 +50,12 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Shamaa
+ * @copyright 2006-2016 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   4.0 released in Sep ##, 2014; SVN: $Id$
+ * @version   4.0 released in Jan 8, 2016
  * @link      http://www.ar-php.org
  */
-
-// New in PHP V5.3: Namespaces
-// namespace I18N\Arabic;
-
-// error_reporting(E_STRICT);
 
 /**
  * Core PHP and Arabic language class
@@ -68,7 +63,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Shamaa
+ * @copyright 2006-2016 Khaled Al-Shamaa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org

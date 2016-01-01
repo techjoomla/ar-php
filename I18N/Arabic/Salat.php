@@ -2,7 +2,7 @@
 /**
  * ----------------------------------------------------------------------
  *  
- * Copyright (c) 2006-2015 Khaled Al-Sham'aa
+ * Copyright (c) 2006-2016 Khaled Al-Sham'aa
  *  
  * http://www.ar-php.org
  *  
@@ -109,10 +109,10 @@
  * respectively, and both point to the north. The qibla is along the great circle 
  * arc AK. The spherical angle q = NAK is the angle at A from the north direction 
  * AN to the direction AK towards the Ka'ba, and so q is the qibla bearing to be 
- * computed. Let F and L be the latitude and longitude of A, and FK and LK be 
+ * computed. Let F and L be the latitude and longitude of A, and FK and LK be 
  * the latitude and longitude of K (the Ka'ba). If all angles and arc lengths 
  * are measured in degrees, then it is seen that the arcs AN and KN are of measure 
- * 90 - F and 90 - FK, respectively. Also, the angle ANK between the meridians 
+ * 90 - F and 90 - FK, respectively. Also, the angle ANK between the meridians 
  * of K and A equals the difference between the longitudes of A and K, that is, 
  * LK - L, no matter what the prime meridian is. Here we are given two sides and 
  * the included angle of a spherical triangle, and it is required to determine one 
@@ -149,22 +149,11 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Sham'aa
+ * @copyright 2006-2016 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
  */
-
-// New in PHP V5.3: Namespaces
-// namespace I18N\Arabic;
-// 
-// $obj = new I18N\Arabic\Salat();
-// 
-// use I18N\Arabic;
-// $obj = new Arabic\Salat();
-//
-// use I18N\Arabic\Salat as Salat;
-// $obj = new Salat();
 
 /**
  * This PHP class calculate the time of Muslim prayer according to the geographic 
@@ -173,7 +162,7 @@
  * @category  I18N 
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Sham'aa
+ * @copyright 2006-2016 Khaled Al-Sham'aa
  *    
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org 
