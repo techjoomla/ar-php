@@ -1,4 +1,4 @@
-What's new in ArPHP 4.0 (release date: May 10, 2015)
+What's new in ArPHP 4.0 (release date: Jan 8, 2016)
 -----------------------------------------------------
 
 * Implement the lazy loading technique (i.e. include/load sub class file automatically when 
