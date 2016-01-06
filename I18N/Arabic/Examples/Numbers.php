@@ -18,7 +18,7 @@
  * @category  I18N
  * @package   I18N_Arabic
  * @author    Khaled Al-Sham'aa <khaled@ar-php.org>
- * @copyright 2006-2015 Khaled Al-Sham'aa
+ * @copyright 2006-2016 Khaled Al-Sham'aa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
  * @link      http://www.ar-php.org
@@ -33,7 +33,7 @@ $Arabic = new I18N_Arabic('Numbers');
 $Arabic->setFeminine(1);
 $Arabic->setFormat(1);
            
-$integer = 14159265358979;
+$integer = 141592653589;
 
 $text = $Arabic->int2str($integer);
 
@@ -52,7 +52,7 @@ $code = <<< END
     \$Arabic->setFeminine(1);
     \$Arabic->setFormat(1);
 
-    \$integer = 14159265358979;
+    \$integer = 141592653589;
 
     \$text = \$Arabic->int2str(\$integer);
 
@@ -70,7 +70,7 @@ highlight_string($code);
     $Arabic->setFeminine(2);
     $Arabic->setFormat(2);
 
-    $integer = 14159265358979;
+    $integer = 141592653589;
 
     $text = $Arabic->int2str($integer);
 
@@ -89,7 +89,7 @@ $code = <<< END
     \$Arabic->setFeminine(2);
     \$Arabic->setFormat(2);
 
-    \$integer = 14159265358979;
+    \$integer = 141592653589;
     
     \$text = \$Arabic->int2str(\$integer);
     
@@ -107,7 +107,7 @@ highlight_string($code);
     $Arabic->setFeminine(2);
     $Arabic->setFormat(2);
     
-    $integer = '-2749.00317';
+    $integer = '-2749.317';
     
     $text = $Arabic->int2str($integer);
     
