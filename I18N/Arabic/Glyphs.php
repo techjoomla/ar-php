@@ -382,7 +382,7 @@ class I18N_Arabic_Glyphs
      *                as numbers and arcs etc...)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function utf8Glyphs($str, $max_chars = 50, $hindo = true)
+    public function utf8Glyphs($str, $max_chars = 150, $hindo = true)
     {
         $str = str_replace(array("\r\n", "\n", "\r"), " \n ", $str);
         $str = str_replace("\t", "        ", $str);
